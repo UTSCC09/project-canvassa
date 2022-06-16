@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, ContentContainer, TitleText } from "../../shared/components";
+import { Button, ContentContainer, TitleText, Markers} from "../../shared/components";
+import {PATHS} from '../../shared/constants';
 
 export const LandingPage = () => {
   return (
@@ -8,13 +9,14 @@ export const LandingPage = () => {
       <TitleText>Canvassa</TitleText>
       <ContentContainer>
         <ButtonContainer>
-          <Button>Public Rooms</Button>
+          <Button href={PATHS.PUBLIC_ROOMS_PAGE}>Public Rooms</Button>
         </ButtonContainer>
         <ButtonContainer>
           <Button>Create a Room</Button>
         </ButtonContainer>
         <TitleText style={{ fontSize: "1.5rem" }}>Copyrighted 2022</TitleText>
       </ContentContainer>
+      <Markers/>
     </Container>
   );
 };
@@ -24,7 +26,6 @@ const ButtonContainer = styled.div`
 `;
 
 const Container = styled.div`
-  background: #f0a8a8;
   height: calc(100vh - 4em);
   width: calc(100vw - 4em);
   display: flex;
