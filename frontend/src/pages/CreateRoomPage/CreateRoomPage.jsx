@@ -6,27 +6,27 @@ export const CreateRoomPage = () => {
   return (
     <Container>
       <TitleText>Canvassa</TitleText>
-      <ContentContainer style={{ background: "#f2f2f2" }}>
+      <ContentContainer style={{ background: "#f2f2f2", width: "75%" }}>
         <TitleText style={{ fontSize: "4rem" }}>Create a Room</TitleText>
         <TitleText style={{ fontSize: "3rem", color: "#767676" }}>
           Create a private room and invite your friends!
         </TitleText>
         <GridContainer>
-          <ContentContainer>
-            <TitleText style={{ fontSize: "2.5rem" }}>Normal</TitleText>
-            <TitleText style={{ fontSize: "2.25rem" }}>
+          <ContentContainer style={{ border: "solid black" }}>
+            <TitleText style={{ fontSize: "2.5rem", textAlign: "center" }}>Normal</TitleText>
+            <TitleText style={{ fontSize: "2.25rem", textAlign: "center", color: "#767676" }}>
               Have fun drawing with your friends.
             </TitleText>
           </ContentContainer>
-          <ContentContainer>
-            <TitleText style={{ fontSize: "2.5rem" }}>Round Robin</TitleText>
-            <TitleText style={{ fontSize: "2.25rem" }}>
+          <ContentContainer style={{ border: "solid black" }}>
+            <TitleText style={{ fontSize: "2.5rem", textAlign: "center" }}>Round Robin</TitleText>
+            <TitleText style={{ fontSize: "2.25rem", textAlign: "center", color: "#767676" }}>
               Get a prompt and take turns drawing it!
             </TitleText>
           </ContentContainer>
-          <ContentContainer>
-            <TitleText style={{ fontSize: "2.5rem" }}>Presenting</TitleText>
-            <TitleText style={{ fontSize: "2.25rem" }}>
+          <ContentContainer style={{ border: "solid black" }}>
+            <TitleText style={{ fontSize: "2.5rem", textAlign: "center" }}>Presenting</TitleText>
+            <TitleText style={{ fontSize: "2.25rem", textAlign: "center", color: "#767676" }}>
               Have a large audience and few presenters that control the canvas
             </TitleText>
           </ContentContainer>
@@ -44,11 +44,17 @@ const ButtonContainer = styled.div`
 `;
 
 const GridContainer = styled.div`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   display: grid;
-  grid-template-columns: 200px 200px;
+  grid-template-columns: 30rem 30rem;
   grid-row: auto auto;
+  column-gap: 2rem;
+  row-gap: 2rem;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
+  width: 90%;
+  justify-content: center;
 `;
 
 const ContentContainer = styled.div`
@@ -62,7 +68,6 @@ const ContentContainer = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 2rem;
-  width: fit-content;
 `;
 
 const Container = styled.div`
