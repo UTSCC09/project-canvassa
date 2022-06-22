@@ -28,7 +28,8 @@ Before being able to successfully run the backend. You need to create a MongoDB 
 - allowed your IP address
 - created a user
 - learned how to connect to the cluster
-  you can create a .env file in the backend directory with `ATLAS_URI=<your cluster uri>`.
+
+you can create a .env file in the backend directory with `ATLAS_URI=<your cluster uri>`.
 
 From here, run:
 
