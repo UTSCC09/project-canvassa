@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Button, TitleText } from "../../shared/components";
+import { PATHS } from "../../shared/constants";
 
 export const CreateRoomPage = () => {
   return (
@@ -32,7 +33,7 @@ export const CreateRoomPage = () => {
           </ContentContainer>
         </GridContainer>
         <ButtonContainer style={{ marginTop: "2rem" }}>
-          <Button href="/">Back</Button>
+          <Button href={`${PATHS.LANDING_PAGE}`}>Back</Button>
         </ButtonContainer>
       </ContentContainer>
     </Container>
