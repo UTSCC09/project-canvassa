@@ -11,7 +11,7 @@ export const LandingPage = () => {
           <Button>Public Rooms</Button>
         </ButtonContainer>
         <ButtonContainer>
-          <Button>Create a Room</Button>
+          <Button href="./rooms/create">Create a Room</Button>
         </ButtonContainer>
         <TitleText style={{ fontSize: "1.5rem" }}>Copyrighted 2022</TitleText>
       </ContentContainer>

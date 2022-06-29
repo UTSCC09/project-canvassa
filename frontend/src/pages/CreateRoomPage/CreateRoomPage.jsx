@@ -6,9 +6,9 @@ export const CreateRoomPage = () => {
   return (
     <Container>
       <TitleText>Canvassa</TitleText>
-      <ContentContainer style={{ background: "#f2f2f2", width: "75%" }}>
-        <TitleText style={{ fontSize: "4rem" }}>Create a Room</TitleText>
-        <TitleText style={{ fontSize: "3rem", color: "#767676" }}>
+      <ContentContainer style={{ background: "#f2f2f2", width: "85%" }}>
+        <TitleText style={{ fontSize: "6rem", textAlign: "center" }}>Create a Room</TitleText>
+        <TitleText style={{ fontSize: "4rem", textAlign: "center", marginTop: "2rem", color: "#767676" }}>
           Create a private room and invite your friends!
         </TitleText>
         <GridContainer>
@@ -31,7 +31,7 @@ export const CreateRoomPage = () => {
             </TitleText>
           </ContentContainer>
         </GridContainer>
-        <ButtonContainer>
+        <ButtonContainer style={{ marginTop: "2rem" }}>
           <Button>Back</Button>
         </ButtonContainer>
       </ContentContainer>
