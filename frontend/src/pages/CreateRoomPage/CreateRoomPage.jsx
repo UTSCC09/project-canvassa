@@ -32,7 +32,7 @@ export const CreateRoomPage = () => {
           </ContentContainer>
         </GridContainer>
         <ButtonContainer style={{ marginTop: "2rem" }}>
-          <Button>Back</Button>
+          <Button href="/">Back</Button>
         </ButtonContainer>
       </ContentContainer>
     </Container>
