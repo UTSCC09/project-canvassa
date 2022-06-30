@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { LandingPage, PublicRoomsPage } from "./pages";
+import { LandingPage } from "./pages";
 import { PATHS } from "./shared/constants";
 
 const App = () => {

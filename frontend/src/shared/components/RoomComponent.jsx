@@ -5,13 +5,13 @@ import backgroundimg from "../../assets/images/canvas-small.png";
 import peopleicon from "../../assets/images/people-icon.png";
 import {PATHS} from "../../shared/constants";
 
-export const RoomComponent = (props) => {
+export const RoomComponent = ({name, players, color}) => {
 
   return (
-    <Background> 
+    <Background color = {color || '#d05f5f'}> 
         <BottomBar>
-            <Name>Test Name</Name>
-            <Number>5</Number>
+            <Name>{name || 'Room Name'}</Name>
+            <Number>{players || '5'}</Number>
             <PeopleIcon/>
             </BottomBar>
     </Background>
@@ -38,23 +38,27 @@ const Name = styled.div`
 const PeopleIcon = styled.div`
   height: 3.5em;
   width: 3.5em; 
-  background-color: red;
   background:url(${peopleicon});
   background-size: cover;
   margin-right: 0.5em;
 `;
 
 const Background = styled.div`
+  margin: 0, 5em;
   position: relative;
-  height: 15em;
-  width: 19em; 
+  height: 20em;
+  width: 25em; 
   background:url(${backgroundimg});
   background-size: contain;
+  margin: 0 auto;
   border-radius: 1.5em;
   border-style: solid;
   border-width: 0.5em;
-  background-color: #d05f5f; /* Tint color */
+  background-color: ${(props)=> props.color}; /* Tint color */
   background-blend-mode: multiply;
+  &:hover{
+    filter: brightness(85%);
+  }
 `;
 
 const BottomBar = styled.div`
@@ -63,7 +67,7 @@ const BottomBar = styled.div`
     left:-0.05em;
     border-radius: 0em 0em 1em 1em;
     height: 3.5em;
-    width: 19.1em;
+    width: 25.1em;
     background-color: white;
     display:flex;
     align-items: center;
