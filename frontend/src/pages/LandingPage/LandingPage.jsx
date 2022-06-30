@@ -5,7 +5,7 @@ import { Button, ContentContainer, TitleText } from "../../shared/components";
 export const LandingPage = () => {
   return (
     <Container>
-      <TitleText>Canvassa</TitleText>
+      <TitleText>Canvasa</TitleText>
       <ContentContainer>
         <ButtonContainer>
           <Button>Public Rooms</Button>
