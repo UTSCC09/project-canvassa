@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  web:
+    build: ./frontend/
+    volumes:
+    - ./frontend/:/usr/src/app
+    working_dir: /usr/src/app
+    command:
+      - /bin/bash
+      - -c
+      - |
+        npm install
+        npm start
+    ports:
+      - "80:3000"
