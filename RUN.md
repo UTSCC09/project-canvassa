@@ -1,6 +1,6 @@
 # Canvassa 🖌️
 
-A web application for users to collaborate on a shared infinite whiteboard.
+Canvassa is a web app that allows multiple uses to draw on the same infinite canvas at the same time. It focuses on providing a collaborative drawing/whiteboard experience.
 
 # Setting up the dev env
 
