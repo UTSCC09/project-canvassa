@@ -21,15 +21,7 @@ and your frontend should be running on an auto-opened tab on your default browse
 
 From the project directory, run `$ cd backend`. This is the working directory for the backend.
 
-Before being able to successfully run the backend. You need to create a MongoDB project and set up a cluster connection. You can do so by following the instructions on their [documentation](https://www.mongodb.com/docs/atlas/government/tutorial/create-project/). Once you have:
-
-- created a project
-- created a cluster in the project
-- allowed your IP address
-- created a user
-- learned how to connect to the cluster
-
-you can create a .env file in the backend directory with `ATLAS_URI=<your cluster uri>`.
+Before being able to successfully run the backend. You need to install MongoDB and MongoDB Compass. You can do so by following the instructions on their [documentation](https://www.mongodb.com/try/download/community). Then, open up MongoDB compass and create a new database. Create a `.env` file in the backend directory and add `MONGODB_PORT` and `DB_NAME` keys in it with the values being the port MongoDB is connected to and the name you chose for the database respectively.
 
 From here, run:
 
