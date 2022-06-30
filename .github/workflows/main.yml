@@ -31,5 +31,5 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
-        run: docker-compose down -d
+        run: docker-compose down
       - run: docker-compose up -d
