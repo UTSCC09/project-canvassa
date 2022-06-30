@@ -1,12 +1,6 @@
 version: "3.9"
 services:
   web:
-    build: .
+    build: ./frontend/
     ports:
-      - "8000:5000"
-    volumes:
-      - .:/code
-    environment:
-      FLASK_ENV: development
-  redis:
-    image: "redis:alpine"
+      - "80:3000"
