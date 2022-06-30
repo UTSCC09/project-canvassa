@@ -39,7 +39,6 @@ const PeopleIcon = styled.div`
 `;
 
 const Background = styled.div`
-  margin: 0, 5em;
   position: relative;
   height: 20em;
   width: 25em;
