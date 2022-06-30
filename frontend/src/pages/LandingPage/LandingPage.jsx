@@ -3,15 +3,22 @@ import styled, {keyframes} from "styled-components";
 import { Button, ContentContainer, TitleText, Markers } from "../../shared/components";
 import backgroundimg from "../../assets/images/math-transparent-background-30.png";
 import {PATHS} from "../../shared/constants";
+import {
+  useNavigate
+} from "react-router-dom";
+
 
 export const LandingPage = () => {
+  const navigate = useNavigate();
+  const goToPublicRoomsPage = ()=> {navigate(PATHS.PUBLIC_ROOMS_PAGE , {replaced:true});};
+
   return (
     <Background>
     <Container>
       <TitleText>Canvassa</TitleText>
       <ContentContainer>
         <ButtonContainer>
-          <Button href={PATHS.PUBLIC_ROOMS_PAGE}>Public Rooms</Button>
+        <Button onClick={goToPublicRoomsPage}>Public Rooms</Button>
         </ButtonContainer>
         <ButtonContainer>
           <Button>Create a Room</Button>
@@ -23,6 +30,7 @@ export const LandingPage = () => {
     </Background>
   );
 };
+
 
 const ButtonContainer = styled.div`
   margin-bottom: 2rem;
