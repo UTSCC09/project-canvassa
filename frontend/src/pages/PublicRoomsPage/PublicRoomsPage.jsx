@@ -1,6 +1,6 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
-import { Button, ContentContainer, TitleText, SubTitleText} from "../../shared/components";
+import { Button, ContentContainer, TitleText, SubTitleText, RoomComponent} from "../../shared/components";
 import backgroundimg from "../../assets/images/math-transparent-background-30.png";
 import {PATHS} from "../../shared/constants";
 
@@ -13,6 +13,10 @@ export const PublicRoomsPage = () => {
       <TitleText>Canvassa</TitleText>
       <ContentContainer>
         <SubTitleText>Public Rooms</SubTitleText>
+        <RoomsContainer>
+          <RoomComponent>
+          </RoomComponent>
+        </RoomsContainer>
         <ButtonContainer>
           <Button href={PATHS.LANDING_PAGE}>Back</Button>
         </ButtonContainer>
@@ -24,6 +28,12 @@ export const PublicRoomsPage = () => {
 
 
 }
+
+const RoomsContainer = styled.div`
+  padding: 1em;
+  border-radius: 1em;
+  background-color: #62626b;
+`;
 
 const ButtonContainer = styled.div`
   margin-bottom: 2rem;
