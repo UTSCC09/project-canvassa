@@ -10,8 +10,12 @@ import {
 import backgroundimg from "../../assets/images/math-transparent-background-30.png";
 import { PATHS } from "../../shared/constants";
 import { Grid } from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 export const PublicRoomsPage = () => {
+  const navigate = useNavigate();
+  const goToLandingPage = ()=> {navigate(PATHS.LANDING_PAGE , {replaced:true});};
+
   return (
     <Background>
       <Container>
@@ -55,7 +59,7 @@ export const PublicRoomsPage = () => {
             </Grid>
           </RoomsContainer>
           <ButtonContainer>
-            <Button href={PATHS.LANDING_PAGE}>Back</Button>
+            <Button onClick={goToLandingPage}>Back</Button>
           </ButtonContainer>
           <TitleText style={{ fontSize: "1.5rem" }}>Copyrighted 2022</TitleText>
         </ContentContainer>
