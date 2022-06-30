@@ -33,5 +33,3 @@ jobs:
       - name: Run a multi-line script
         run: docker-compose down -d
       - run: docker-compose up -d
-          echo Add other actions to build,
-          echo test, and deploy your project.
