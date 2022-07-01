@@ -33,4 +33,5 @@ jobs:
       - name: Run a multi-line script
         run: sudo chmod -R 777 ./
       - run: docker-compose down
+      - run: sudo chmod -R 777 ./
       - run: docker-compose up -d
