@@ -30,5 +30,5 @@ app.get("/", (req, res) => {
 
 // profile details
 app.get("/profile", requiresAuth(), (req, res) => {
-  res.send(JSON.stringify(req.oidc.user.sub));
+  res.send(JSON.stringify(req.oidc.user));
 });
