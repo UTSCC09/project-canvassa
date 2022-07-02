@@ -1,13 +1,12 @@
 const { MongoClient } = require("mongodb");
-require("dotenv").config();
-
-const mongodbPort = process.env.MONGODB_PORT;
-const dbName = process.env.DB_NAME;
+const { ENV_VARS } = require("./constants");
 
 let connection = null;
 
 const connectToDb = (cb = (err) => {}) => {
-  MongoClient.connect(`mongodb://localhost:${mongodbPort}/${dbName}`)
+  MongoClient.connect(
+    `mongodb://localhost:${ENV_VARS.MONGODB_PORT}/${ENV_VARS.DB_NAME}`
+  )
     .then((client) => {
       console.log("MongoDB database connection established successfully");
       connection = client.db();
