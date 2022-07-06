@@ -1,41 +1,84 @@
-# Canvassa 🖌️
+# Project Proposal
 
-A web application for users to collaborate on a shared infinite whiteboard.
 
-# Setting up the dev env
+## CSC C09 - Summer 2022
 
-The following instructions are for setting up a development environment. Note that it expects your system to have `node.js` installed. If you do not, you can do so with their [documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-## Frontend
+# Project Information
 
-From the project directory, run `$ cd frontend`. This is the working directory for the frontend. From here, run:
+Project Title: Canvassa
 
-```
-$ npm i
-$ npm start
-```
+Team Members:
 
-and your frontend should be running on an auto-opened tab on your default browser.
 
-## Backend
 
-From the project directory, run `$ cd backend`. This is the working directory for the backend.
+* Mohammad Rahman
+* Shammo Talukder
+* Farhan Chowdhury
 
-Before being able to successfully run the backend. You need to create a MongoDB project and set up a cluster connection. You can do so by following the instructions on their [documentation](https://www.mongodb.com/docs/atlas/government/tutorial/create-project/). Once you have:
 
-- created a project
-- created a cluster in the project
-- allowed your IP address
-- created a user
-- learned how to connect to the cluster
+### Description
 
-you can create a .env file in the backend directory with `ATLAS_URI=<your cluster uri>`.
+Canvassa is a web app that allows users to create or join rooms with their friends or the general public, with whom they can paint, write, sketch, colour, and do more on a whiteboard-like canvas. The rooms will offer messaging and private rooms will also feature audio chat so that users can collaborate more freely. The goal of the app is to provide people with a collaborative experience with a canvas that they can customise to their own desire, no matter what that may be.
 
-From here, run:
+Public rooms will allow anyone to join and contribute to collaborative work with strangers all over the world.
 
-```
-$ npm i
-$ nodemon server.js
-```
+Groups of friends can create and join private rooms for a more intimate experience. Here they can freely work together to compose something on the canvas, or they can take advantage of the various game modes to make the experience more geared towards entertainment instead of art. The round robin game mode offers rounds wherein each person will get a limited amount of time to contribute to a drawing to address a common prompt that will ask them to draw something. At the end of the round, the players will get to see how their collaborative effort sizes up to the expectation set by the prompt.
 
-and you should have the server running.
+Presentation rooms offer opportunities for more recreational or instructional experiences, where certain participants will act as presenters and be able to use the canvas while others function as audience members who can witness the canvas as it shifts. This mode is ideal when a small subset of the participants want to address a much larger subset.
+
+
+# Challenge Factors - Beta Release
+
+For the beta release, Canvassa will allow users to create and join rooms. They will be able to create the room in any of the aforementioned modes. An authentication and authorization system will be implemented to ensure private rooms remain restricted. The creator of the room can share the room code which their friends can use to enter the room. Each room will feature a canvas, an exit button to leave the room, a list of individuals in the room, and a toolbar with the following tools to customise the canvas:
+
+
+
+* Paintbrush 
+* Colour picker
+* Slider for stroke size
+* Fill tool
+* Square select
+* Text input
+* Eraser
+
+
+### In-depth work with specific web technology
+
+In order to implement the canvas and its tools, three.js, a 3D graphics rendering framework will be utilised. three.js natively supports the creation and manipulation of a scene wherein users can create renderable objects and update the scene. Canvassa will leverage this by designing the canvas tools to create the objects and update the scene on rerenders of the webpage to mimic manipulating a canvas. three.js is an optimal choice to implement Canvassa’s features as it:
+
+
+
+* allows any object to be rendered which Canvassa can leverage if it were to expand its own toolbar in the future
+* natively supports many features that a Canvassa canvas must support (e.g. zoom, object colouring, panning, etc.)
+* supports 3D rendering so Canvassa can expand to 3D canvases in future modes
+
+
+### Scalability + real-time interaction
+
+A crucial goal for the app is to ensure it is developed with scalability in mind. This means the app should be able to comfortably support high traffic with many active rooms at the same time. Since the canvas will be heavy in terms of data, only the updates to the canvas will be communicated to avoid desynchronizing users in the same room with slow communication, with the rest of the canvas data being cached on the frontend. Timestamp data will accompany the updates to the canvas so that receivers can ensure they have the most updated canvases. If not, they must reload the canvas from the database. Moreover, although general room information will be acquired through CRUD operations, the canvas data will be communicated through sockets, as frequent back and forth must be available to ensure all users in a room are synchronised.
+
+
+### Authentication + OAuth
+
+Canvassa will also support persistent accounts so users can keep records of the rooms they created (i.e. timestamps on creation and termination, attendance list, final canvas snapshot). This will also mean a more robust authentication and authorization system will have to be in place to support independent accounts.
+
+
+### End-to-end testing
+
+In order to ensure confidence in the correctness of development and to prevent new features from introducing bugs in previous ones, all features will be pushed with fully supported end to end test suites using Cypress.io.
+
+
+# Challenge Factors - Final Release
+
+
+### Real-time interaction (extended)
+
+For the final release, the rooms will support text and audio chat among members. Collapsable sub-windows will be available to ensure users can collaborate more effectively with others in the room without compromising screen space. This will also need to be supported with sockets as correspondence will require a lot of back and forth between the server and clients.
+
+
+# Tech Stack
+
+React.js will be used for the frontend. This is because although it makes adherence to the MVVM protocol and keeping the JS, HTML, and CSS independent more difficult, the utilitarian approach React provides is ideal for rapid development, which can be crucial as we are dealing with hard deadlines for the progression of the project and other courses can prevent us from spending as much time as we would want to on development. Most importantly however, we are most experienced with React so choosing it allows our learning to focus on the web problems we tackle rather than the specific framework.
+
+Node.js and Express.js will be used for the server, and the data will be stored in a MongoDB database. A NoSQL database is ideal as the data is sparse in terms of relationships and the canvas does not require complex queries to operate.

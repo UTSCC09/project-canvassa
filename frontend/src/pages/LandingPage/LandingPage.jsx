@@ -6,7 +6,7 @@ import { PATHS } from "../../shared/constants";
 export const LandingPage = () => {
   return (
     <Container>
-      <TitleText>Canvassa</TitleText>
+      <TitleText>Canvasa</TitleText>
       <ContentContainer>
         <ButtonContainer>
           <Button>Public Rooms</Button>
