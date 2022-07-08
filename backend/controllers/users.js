@@ -16,6 +16,17 @@ router.route("/").get(async (req, res) => {
   }
 });
 
+router.route("/").patch(async (req, res) => {
+  try {
+    const { email } = req.body;
+    let user = await getUserByEmail(email);
+    if (!user) user = await createUser(email);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(err.status).json({ errors: err.messages });
+  }
+});
+
 router.route("/:id").get(async (req, res) => {
   try {
     res.status(200).json({ done: true, id: true });
@@ -24,4 +35,4 @@ router.route("/:id").get(async (req, res) => {
   }
 });
 
-module.exports = { router };
+module.exports = router;

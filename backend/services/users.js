@@ -9,16 +9,12 @@ const getUsers = async () => {
 const getUser = async (id) => {
   if (!id) throw new CanvassaException(400, "invalid id");
   const user = await usersDatabase.getUser(id);
-  if (!user)
-    throw new CanvassaException(404, `user with id ${id} does not exist`);
   return user;
 };
 
 const getUserByEmail = async (email) => {
   if (!email) throw new CanvassaException(400, "invalid email");
   const user = await usersDatabase.getUserByEmail(email);
-  if (!user)
-    throw new CanvassaException(404, `user with email ${email} does not exist`);
   return user;
 };
 
