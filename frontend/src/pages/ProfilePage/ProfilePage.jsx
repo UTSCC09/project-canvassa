@@ -1,40 +1,42 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
-import { useUsersApi } from "../../shared/api/usersApi";
 import { Button, ContentContainer, TitleText } from "../../shared/components";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../shared/constants";
 
-export const LandingPage = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+export const ProfilePage = () => {
+  const { isAuthenticated, isLoading, logout, loginWithRedirect } = useAuth0();
   const navigate = useNavigate();
-  const { updateUser } = useUsersApi();
 
-  useEffect(() => {
-    if (isAuthenticated) updateUser(user.email);
-  });
+  const loginHandler = () => {
+    loginWithRedirect();
+  };
+
+  const logoutHandler = () => {
+    logout({ returnTo: window.location.origin });
+  };
 
   if (isLoading) return null;
 
   return (
     <Container>
-      <TitleText>Canvasa</TitleText>
       <ContentContainer>
+        <TitleText>Profile</TitleText>
         <ButtonContainer>
-          <Button>Public Rooms</Button>
-        </ButtonContainer>
-        <ButtonContainer>
-          <Button>Create a Room</Button>
+          {isAuthenticated ? (
+            <Button onClick={logoutHandler}>Log Out</Button>
+          ) : (
+            <Button onClick={loginHandler}>Log In</Button>
+          )}
         </ButtonContainer>
         <ButtonContainer>
           <Button
-            onClick={() => navigate(PATHS.PROFILE_PAGE, { replaced: true })}
+            onClick={() => navigate(PATHS.LANDING_PAGE, { replaced: true })}
           >
-            Profile
+            Back
           </Button>
         </ButtonContainer>
-        <TitleText style={{ fontSize: "1.5rem" }}>Copyrighted 2022</TitleText>
       </ContentContainer>
     </Container>
   );
