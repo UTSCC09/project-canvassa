@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useAuthApi } from "../../shared/api";
 import { Button, ContentContainer, TitleText } from "../../shared/components";
+import { PATHS } from "../../shared/constants";
 
 export const LandingPage = () => {
+  const navigate = useNavigate();
+  const { isLoggedIn } = useAuthApi();
+
+  useEffect(() => {
+    if (!isLoggedIn()) navigate(PATHS.AUTH_PAGE, { replaced: true });
+  });
+
   return (
     <Container>
       <TitleText>Canvasa</TitleText>
@@ -12,6 +22,11 @@ export const LandingPage = () => {
         </ButtonContainer>
         <ButtonContainer>
           <Button>Create a Room</Button>
+        </ButtonContainer>
+        <ButtonContainer>
+          <Button onClick={() => navigate(PATHS.AUTH_PAGE, { replaced: true })}>
+            Profile
+          </Button>
         </ButtonContainer>
         <TitleText style={{ fontSize: "1.5rem" }}>Copyrighted 2022</TitleText>
       </ContentContainer>
