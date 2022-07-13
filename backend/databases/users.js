@@ -13,16 +13,16 @@ const getUser = async (id) => {
   return user;
 };
 
-const getUserByEmail = async (email) => {
-  const user = await getDb().collection("users").findOne({ email });
+const getUserByUsername = async (username) => {
+  const user = await getDb().collection("users").findOne({ username });
   return user;
 };
 
-const createUser = async (email) => {
+const createUser = async (username, password) => {
   const ts = new Timestamp();
   const user = await getDb()
     .collection("users")
-    .insertOne({ email, createdAt: ts, updatedAt: ts });
+    .insertOne({ username, password, createdAt: ts, updatedAt: ts });
   return user;
 };
 
@@ -33,5 +33,5 @@ module.exports = {
   getUser,
   createUser,
   updateUser,
-  getUserByEmail,
+  getUserByUsername,
 };

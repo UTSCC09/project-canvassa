@@ -2,6 +2,14 @@ require("dotenv").config({ path: __dirname + "/../.env" });
 
 const PORT = process.env.PORT || 5000;
 
+const AUTH_VARS = {
+  SALT_ROUNDS: 10,
+};
+
+const FE_VARS = {
+  ROOT: process.env.FE_ROOT,
+};
+
 const ENV_VARS = {
   PORT,
   MONGODB_PORT: process.env.MONGODB_PORT,
@@ -12,4 +20,4 @@ const ENV_VARS = {
   AUTH0_ISSUER_BASE_URL: process.env.AUTH0_ISSUER_BASE_URL,
 };
 
-module.exports = { ENV_VARS };
+module.exports = { ENV_VARS, AUTH_VARS, FE_VARS };

@@ -12,23 +12,27 @@ const getUser = async (id) => {
   return user;
 };
 
-const getUserByEmail = async (email) => {
-  if (!email) throw new CanvassaException(400, "invalid email");
-  const user = await usersDatabase.getUserByEmail(email);
+const getUserByUsername = async (username) => {
+  if (!username) throw new CanvassaException(400, "invalid username");
+  const user = await usersDatabase.getUserByUsername(username);
   return user;
 };
 
-const createUser = async (email) => {
-  if (!email) throw new CanvassaException(400, "invalid email");
-  const user = await getUserByEmail(email);
+const createUser = async (username, password) => {
+  if (!username || !password)
+    throw new CanvassaException(400, "invalid username or password");
+  const user = await getUserByUsername(username);
   if (user)
-    throw new CanvassaException(400, `user with email ${email} already exists`);
-  return await usersDatabase.createUser(email);
+    throw new CanvassaException(
+      400,
+      `user with username ${username} already exists`
+    );
+  return await usersDatabase.createUser(username, password);
 };
 
 const updateUser = async (updateData) => {
   if (!updateData) throw new CanvassaException(400, "invalid user data");
-  const validKeys = ["email"];
+  const validKeys = ["username", "password"];
   for (key in updateData) {
     if (!validKeys.includes(key) || !updateData[key])
       throw new CanvassaException(400, `invalid key ${key}`);
@@ -41,5 +45,5 @@ module.exports = {
   getUser,
   createUser,
   updateUser,
-  getUserByEmail,
+  getUserByUsername,
 };

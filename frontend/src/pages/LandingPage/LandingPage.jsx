@@ -1,21 +1,17 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useUsersApi } from "../../shared/api/usersApi";
+import { useAuthApi } from "../../shared/api";
 import { Button, ContentContainer, TitleText } from "../../shared/components";
 import { PATHS } from "../../shared/constants";
 
 export const LandingPage = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
   const navigate = useNavigate();
-  const { updateUser } = useUsersApi();
+  const { isLoggedIn } = useAuthApi();
 
   useEffect(() => {
-    if (isAuthenticated) updateUser(user.email);
+    if (!isLoggedIn()) navigate(PATHS.AUTH_PAGE, { replaced: true });
   });
-
-  if (isLoading) return null;
 
   return (
     <Container>
@@ -28,9 +24,7 @@ export const LandingPage = () => {
           <Button>Create a Room</Button>
         </ButtonContainer>
         <ButtonContainer>
-          <Button
-            onClick={() => navigate(PATHS.PROFILE_PAGE, { replaced: true })}
-          >
+          <Button onClick={() => navigate(PATHS.AUTH_PAGE, { replaced: true })}>
             Profile
           </Button>
         </ButtonContainer>

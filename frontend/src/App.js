@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { LandingPage, ProfilePage } from "./pages";
+import { LandingPage, AuthPage } from "./pages";
 import { PATHS } from "./shared/constants";
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path={PATHS.LANDING_PAGE} exact element={<LandingPage />} />
-        <Route path={PATHS.PROFILE_PAGE} exact element={<ProfilePage />} />
+        <Route path={PATHS.AUTH_PAGE} exact element={<AuthPage />} />
       </Routes>
     </Router>
   );
