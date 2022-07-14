@@ -23,7 +23,9 @@ router.route("/signup").post(async (req, res) => {
     const user = await signup(username, password);
     return login(req, res, user);
   } catch (err) {
-    res.status(err.status).json({ errors: err.messages });
+    res
+      .status(err.status ?? 500)
+      .json({ errors: err.messages ?? ["Internal server error"] });
   }
 });
 
@@ -33,7 +35,9 @@ router.route("/signin").post(async (req, res) => {
     const user = await signin(username, password);
     return login(req, res, user);
   } catch (err) {
-    res.status(err.status).json({ errors: err.messages });
+    res
+      .status(err.status ?? 500)
+      .json({ errors: err.messages ?? ["Internal server error"] });
   }
 });
 
@@ -48,7 +52,9 @@ router.route("/signout").get(async (req, res) => {
     );
     return res.status(200).end();
   } catch (err) {
-    res.status(err.status).json({ errors: err.messages });
+    res
+      .status(err.status ?? 500)
+      .json({ errors: err.messages ?? ["Internal server error"] });
   }
 });
 

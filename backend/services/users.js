@@ -40,10 +40,32 @@ const updateUser = async (updateData) => {
   usersDatabase.updateUser(updateData);
 };
 
+const addRoom = async (id, roomId) => {
+  if (!id) throw new CanvassaException(400, "invalid id");
+  if (!roomId) throw new CanvassaException(400, "invalid roomId");
+
+  const user = await getUser(id);
+  if (user.rooms.includes(roomId))
+    throw new CanvassaException(409, `user already in room with id ${roomId}`);
+  return await usersDatabase.addRoom(id, roomId);
+};
+
+const removeRoom = async (id, roomId) => {
+  if (!id) throw new CanvassaException(400, "invalid id");
+  if (!roomId) throw new CanvassaException(400, "invalid roomId");
+
+  const user = await getUser(id);
+  if (!user.rooms.includes(roomId))
+    throw new CanvassaException(409, `user not in room with id ${roomId}`);
+  return await usersDatabase.removeRoom(id, roomId);
+};
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
   updateUser,
   getUserByUsername,
+  removeRoom,
+  addRoom,
 };

@@ -6,6 +6,7 @@ const session = require("express-session");
 const { ENV_VARS, FE_VARS } = require("./utils/constants");
 const usersRouter = require("./controllers/users");
 const authRouter = require("./controllers/auth");
+const roomsRouter = require("./controllers/rooms");
 
 const startServer = async () => {
   const app = express();
@@ -57,6 +58,7 @@ const startServer = async () => {
 
   app.use("/users", usersRouter);
   app.use("/auth", authRouter);
+  app.use("/rooms", roomsRouter);
 };
 
 startServer();
