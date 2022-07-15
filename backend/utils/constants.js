@@ -20,4 +20,12 @@ const ENV_VARS = {
   AUTH0_ISSUER_BASE_URL: process.env.AUTH0_ISSUER_BASE_URL,
 };
 
-module.exports = { ENV_VARS, AUTH_VARS, FE_VARS };
+const SOCKET_EVENTS = {
+  CONNECT: "connect",
+  DISCONNECT: "disconnect",
+  JOIN_ROOM: "join-room",
+  UPDATE_ROOM_MEMBERS: "update-room-members",
+  ERROR: "error",
+};
+
+module.exports = { ENV_VARS, AUTH_VARS, FE_VARS, SOCKET_EVENTS };
