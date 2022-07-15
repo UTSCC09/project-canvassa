@@ -7,7 +7,7 @@ import {
   TitleText,
 } from "../../shared/components";
 import { useNavigate } from "react-router-dom";
-import { PATHS } from "../../shared/constants";
+import { getPaths } from "../../shared/constants";
 import { useAuthApi } from "../../shared/api";
 
 export const AuthPage = () => {
@@ -96,7 +96,9 @@ export const AuthPage = () => {
             }
             <ButtonContainer>
               <Button
-                onClick={() => navigate(PATHS.LANDING_PAGE, { replaced: true })}
+                onClick={() =>
+                  navigate(getPaths.getLandingPage(), { replaced: true })
+                }
               >
                 Back
               </Button>
