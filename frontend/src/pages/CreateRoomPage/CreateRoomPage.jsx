@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { Button, TitleText } from "../../shared/components";
-import { PATHS } from "../../shared/constants";
+import { useNavigate } from "react-router-dom";
+import { getPaths } from "../../shared/constants";
 
 export const CreateRoomPage = () => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <TitleText>Canvassa</TitleText>
@@ -33,7 +36,7 @@ export const CreateRoomPage = () => {
           </ContentContainer>
         </GridContainer>
         <ButtonContainer style={{ marginTop: "2rem" }}>
-          <Button href={`${PATHS.LANDING_PAGE}`}>Back</Button>
+          <Button onClick={() => navigate(getPaths.getLandingPage(), { replaced: true })}>Back</Button>
         </ButtonContainer>
       </ContentContainer>
     </Container>

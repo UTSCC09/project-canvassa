@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { Button, ContentContainer, TitleText } from "../../shared/components";
-import { PATHS } from "../../shared/constants";
+import { useNavigate } from "react-router-dom";
+import { getPaths } from "../../shared/constants";
 
 export const LandingPage = () => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <TitleText>Canvasa</TitleText>
@@ -12,7 +15,7 @@ export const LandingPage = () => {
           <Button>Public Rooms</Button>
         </ButtonContainer>
         <ButtonContainer>
-        <Button href={`${PATHS.CREATE_ROOM_PAGE}`}>Create a Room</Button>
+        <Button onClick={() => navigate(getPaths.getCreateRoomsPage(), { replaced: true })}>Create a Room</Button>
         </ButtonContainer>
         <TitleText style={{ fontSize: "1.5rem" }}>Copyrighted 2022</TitleText>
       </ContentContainer>

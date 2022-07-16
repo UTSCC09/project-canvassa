@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { CreateRoomPage, LandingPage } from "./pages";
-import { PATHS } from "./shared/constants";
+import { getPaths } from "./shared/constants";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path={PATHS.LANDING_PAGE} exact element={<LandingPage />} />
-        <Route path={PATHS.CREATE_ROOM_PAGE} exact element={<CreateRoomPage />} />
+        <Route path={getPaths.getLandingPage()} exact element={<LandingPage />} />
+        <Route path={getPaths.getCreateRoomsPage()} exact element={<CreateRoomPage />} />
       </Routes>
     </Router>
   );
