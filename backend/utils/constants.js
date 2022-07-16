@@ -25,7 +25,7 @@ const SOCKET_EVENTS = {
   DISCONNECT: "disconnect",
   JOIN_ROOM: "join-room",
   UPDATE_ROOM_MEMBERS: "update-room-members",
-  ERROR: "error",
+  ERROR: "cavassa-error",
 };
 
 module.exports = { ENV_VARS, AUTH_VARS, FE_VARS, SOCKET_EVENTS };

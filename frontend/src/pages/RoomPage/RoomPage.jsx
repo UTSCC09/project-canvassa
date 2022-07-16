@@ -1,13 +1,48 @@
-import { Drawer } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../../shared/components";
 import { Menu } from "./Menu";
+import io from "socket.io-client";
 
 export const RoomPage = () => {
   const { id: roomId } = useParams();
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [socket, setSocket] = useState(null);
+  const [roomData, setRoomData] = useState({
+    id: roomId,
+    members: [],
+    name: "My Room",
+    link: "http://localhost:5000/join",
+  });
+
+  useEffect(() => {
+    if (socket || !roomData) return;
+
+    // establish socket connection
+    const newSocket = io("http://localhost:5000", {
+      transports: ["websocket"],
+      auth: { token: "test" },
+    });
+    setSocket(newSocket);
+
+    return () => newSocket.disconnect();
+  }, [roomData, socket]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("connect_error", (message) => console.log(message));
+
+    socket.on("canvassa-error", ({ code, msgs }) => {
+      console.log(`ERROR: ${code}`);
+      console.log(msgs);
+    });
+
+    socket.on("update-room-members", ({ members }) =>
+      setRoomData({ ...roomData, members })
+    );
+  });
 
   return (
     <Container>
@@ -17,12 +52,7 @@ export const RoomPage = () => {
       <Menu
         isOpen={isNavbarOpen}
         onClose={() => setIsNavbarOpen(false)}
-        data={{
-          id: roomId,
-          name: "My Room",
-          members: ["1"],
-          link: "http://localhost:5000/join",
-        }}
+        data={roomData}
       />
     </Container>
   );

@@ -7,6 +7,7 @@ const { ENV_VARS, FE_VARS } = require("./utils/constants");
 const usersRouter = require("./controllers/users");
 const authRouter = require("./controllers/auth");
 const roomsRouter = require("./controllers/rooms");
+const { setupSockets } = require("./socket");
 
 const startServer = async () => {
   const app = express();
@@ -31,6 +32,10 @@ const startServer = async () => {
       "Origin, X-Requested-With, Content-Type, Accept"
     );
     res.header("Access-Control-Allow-Origin", FE_VARS.ROOT);
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT, PATCH"
+    );
     console.log(
       "HTTP request",
       req.session?.username,
@@ -59,6 +64,8 @@ const startServer = async () => {
   app.use("/users", usersRouter);
   app.use("/auth", authRouter);
   app.use("/rooms", roomsRouter);
+
+  setupSockets(server);
 };
 
 startServer();

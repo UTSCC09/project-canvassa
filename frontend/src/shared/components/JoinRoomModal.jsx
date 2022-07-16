@@ -6,14 +6,18 @@ import { Textfield } from "./Textfield";
 import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
 import { getPaths } from "../constants";
+import { useRoomsApi } from "../api";
 
 export const JoinRoomModal = ({ isOpen, onClose }) => {
   const [roomName, setRoomName] = useState("");
   const navigate = useNavigate();
+  const { createRoom } = useRoomsApi();
 
   const createRoomHandler = () => {
-    const id = "sa12312312313sadasq2";
-    navigate(getPaths.getRoomPage(id), { replaced: true });
+    createRoom(roomName).then(
+      (room) =>
+        room && navigate(getPaths.getRoomPage(room.id), { replaced: true })
+    );
   };
 
   return (
@@ -39,6 +43,7 @@ export const JoinRoomModal = ({ isOpen, onClose }) => {
             />
           </ModalInputContainer>
           <SubmitButton onClick={createRoomHandler}>Confirm</SubmitButton>
+          <SubmitButton onClick={onClose}>Back</SubmitButton>
         </StyledBox>
       </ContentContainer>
     </Modal>
