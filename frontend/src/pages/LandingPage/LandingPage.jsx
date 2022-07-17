@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useAuthApi } from "../../shared/api";
 import { Button, ContentContainer, TitleText } from "../../shared/components";
-import { PATHS } from "../../shared/constants";
+import { getPaths } from "../../shared/constants";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useAuthApi();
 
   useEffect(() => {
-    if (!isLoggedIn()) navigate(PATHS.AUTH_PAGE, { replaced: true });
+    if (!isLoggedIn()) navigate(getPaths.getAuthPage(), { replaced: true });
   });
 
   return (
@@ -21,10 +21,10 @@ export const LandingPage = () => {
           <Button>Public Rooms</Button>
         </ButtonContainer>
         <ButtonContainer>
-          <Button>Create a Room</Button>
+        <Button onClick={() => navigate(getPaths.getCreateRoomsPage(), { replaced: true })}>Create a Room</Button>
         </ButtonContainer>
         <ButtonContainer>
-          <Button onClick={() => navigate(PATHS.AUTH_PAGE, { replaced: true })}>
+          <Button onClick={() => navigate(getPaths.getAuthPage(), { replaced: true })}>
             Profile
           </Button>
         </ButtonContainer>
