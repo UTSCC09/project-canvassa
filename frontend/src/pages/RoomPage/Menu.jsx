@@ -4,19 +4,17 @@ import styled from "styled-components";
 import { TitleText } from "../../shared/components";
 
 export const Menu = ({ isOpen, onClose, data }) => {
-  const { name, members, link } = data;
-
   return (
     <Drawer anchor="left" open={isOpen} onClose={onClose}>
       <Container>
         <div>
-          <RoomTitle>{name}</RoomTitle>
+          <RoomTitle>{data?.name}</RoomTitle>
         </div>
         <div>
-          <RoomLink>{link}</RoomLink>
+          <RoomLink>{data?.link}</RoomLink>
         </div>
         <div>
-          <RoomMembersCount>Members: {members?.length}</RoomMembersCount>
+          <RoomMembersCount>Members: {data?.members?.length}</RoomMembersCount>
         </div>
       </Container>
     </Drawer>

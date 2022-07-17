@@ -1,15 +1,15 @@
 import axios from "axios";
 import { API } from "../constants";
 
-const getUserName = () =>
+const getUsername = () =>
   document.cookie.replace(
     /(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
 
 export const useAuthApi = () => ({
-  getUserName,
-  isLoggedIn: () => getUserName() !== "",
+  getUsername,
+  isLoggedIn: () => getUsername() !== "",
   signin: (username, password) =>
     axios
       .post(

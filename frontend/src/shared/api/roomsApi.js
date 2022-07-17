@@ -13,4 +13,11 @@ export const useRoomsApi = () => ({
       )
       .then((res) => res.data)
       .catch((err) => console.error(err)),
+  getRoom: (id) =>
+    axios
+      .get(`${API.ROOT}/rooms/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => res.data)
+      .catch((err) => console.error(err)),
 });

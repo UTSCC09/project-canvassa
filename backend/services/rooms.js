@@ -12,7 +12,6 @@ const createRoom = async (name, author, initialMembers = null, canvas = {}) => {
   // allow initialMembers to be optional
   if (initialMembers === null) {
     const user = await usersService.getUserByUsername(author);
-    console.log(user);
     initialMembers = [user._id];
   }
   const link = ""; // TODO: create join link
@@ -22,7 +21,6 @@ const createRoom = async (name, author, initialMembers = null, canvas = {}) => {
     initialMembers,
     canvas
   );
-  console.log(room);
   await Promise.all(
     room.members.map(
       async (member) => await usersService.addRoom(member, room._id)

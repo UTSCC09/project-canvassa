@@ -1,12 +1,13 @@
-const socket = require("socket.io");
+const { Server } = require("socket.io");
 const CanvassaException = require("./exceptions/CanvassaException");
 const { onDisconnect, onJoinRoom } = require("./sockets");
 const { SOCKET_EVENTS } = require("./utils/constants");
 
 const setupSockets = (server) => {
-  const io = socket(server);
+  const io = new Server(server);
 
   io.use((socket, next) => {
+    console.log(`Socket ${socket.id} ${socket.handshake.auth.token}`);
     if (socket.handshake.auth.token) {
       socket.username = socket.handshake.auth.token;
       next();
@@ -24,7 +25,7 @@ const setupSockets = (server) => {
     );
     socket.on(
       SOCKET_EVENTS.JOIN_ROOM,
-      async ({ roomId, userId }) => await onJoinRoom(io, socket, roomId, userId)
+      async ({ roomId }) => await onJoinRoom(io, socket, roomId)
     );
   });
 };

@@ -16,7 +16,7 @@ export const JoinRoomModal = ({ isOpen, onClose }) => {
   const createRoomHandler = () => {
     createRoom(roomName).then(
       (room) =>
-        room && navigate(getPaths.getRoomPage(room.id), { replaced: true })
+        room && navigate(getPaths.getRoomPage(room._id), { replaced: true })
     );
   };
 

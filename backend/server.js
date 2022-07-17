@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { connectToDb } = require("./utils/db");
 const session = require("express-session");
+const { createServer } = require("http");
 
 const { ENV_VARS, FE_VARS } = require("./utils/constants");
 const usersRouter = require("./controllers/users");
@@ -49,23 +50,26 @@ const startServer = async () => {
   app.use(function (req, res, next) {
     req.username = req.session?.username ?? null;
 
-    if (!req.originalUrl.includes("/auth/")) {
-      if (!req.username) return res.status(401).end("access denied");
+    if (!req.originalUrl.includes("/auth/") && req.method !== "OPTIONS") {
+      if (!req.username)
+        return res.status(401).json({ errors: ["access denied"] });
     }
     next();
   });
 
   await connectToDb();
 
-  const server = app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-  });
+  app.use("/api/users", usersRouter);
+  app.use("/api/auth", authRouter);
+  app.use("/api/rooms", roomsRouter);
 
-  app.use("/users", usersRouter);
-  app.use("/auth", authRouter);
-  app.use("/rooms", roomsRouter);
+  const server = createServer(app);
 
   setupSockets(server);
+
+  server.listen(port, () => {
+    console.log(`Server is running on port: ${port}`);
+  });
 };
 
 startServer();

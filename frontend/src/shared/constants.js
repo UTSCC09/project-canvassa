@@ -9,5 +9,12 @@ export const getPaths = {
 export const APP_TITLE = "Canvassa";
 
 export const API = {
-  ROOT: "http://localhost:5000",
+  ROOT: "http://localhost:5000/api",
+};
+
+export const SOCKET_EVENTS = {
+  JOIN_ROOM: "join-room",
+  UPDATE_ROOM_MEMBERS: "update-room-members",
+  ERROR: "cavassa-error",
+  CONNECT_ERROR: "connect_error",
 };

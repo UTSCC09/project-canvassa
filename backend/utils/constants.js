@@ -21,7 +21,7 @@ const ENV_VARS = {
 };
 
 const SOCKET_EVENTS = {
-  CONNECT: "connect",
+  CONNECT: "connection",
   DISCONNECT: "disconnect",
   JOIN_ROOM: "join-room",
   UPDATE_ROOM_MEMBERS: "update-room-members",
