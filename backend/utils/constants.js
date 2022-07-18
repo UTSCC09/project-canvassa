@@ -12,6 +12,7 @@ const FE_VARS = {
 
 const ENV_VARS = {
   PORT,
+  DOMAIN: process.env.DOMAIN,
   MONGODB_PORT: process.env.MONGODB_PORT,
   DB_NAME: process.env.DB_NAME,
   AUTH0_SECRET: process.env.AUTH0_SECRET,

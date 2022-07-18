@@ -7,6 +7,7 @@ const {
   removeRoomMember,
   deleteRoom,
 } = require("../services/rooms");
+const { FE_VARS } = require("../utils/constants");
 
 router.route("/").post(async (req, res) => {
   try {
@@ -65,6 +66,23 @@ router.route("/:id").delete(async (req, res) => {
     const { id } = req.params;
     const room = await deleteRoom(id);
     res.status(200).json(room);
+  } catch (err) {
+    res
+      .status(err.status ?? 500)
+      .json({ errors: err.messages ?? ["Internal server error"] });
+  }
+});
+
+router.route("/:id/dynamic-join").get(async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const room = await getRoom(id);
+    console.log(room);
+    if (!room)
+      throw new CanvassaException(404, `rooom with id ${id} does not exist`);
+    console.log(`${FE_VARS.ROOT}/rooms/${id}`);
+    return res.redirect(301, `${FE_VARS.ROOT}/rooms/${id}`);
   } catch (err) {
     res
       .status(err.status ?? 500)

@@ -1,11 +1,16 @@
 const { ObjectId, Timestamp } = require("mongodb");
 const { getDb } = require("../utils/db");
 
-const createRoom = async (name, link, members, canvas) => {
+const createRoom = async (name, members, canvas) => {
   const ts = new Timestamp();
-  const room = await getDb()
-    .collection("rooms")
-    .insertOne({ name, link, createdAt: ts, updatedAt: ts, members, canvas });
+  const room = await getDb().collection("rooms").insertOne({
+    name,
+    link: "",
+    createdAt: ts,
+    updatedAt: ts,
+    members,
+    canvas,
+  });
   return await getRoom(room.insertedId);
 };
 
@@ -47,10 +52,23 @@ const deleteRoom = async (id) => {
   return room.value;
 };
 
+const updateRoomLink = async (id, link) => {
+  const ts = new Timestamp();
+  const room = await getDb()
+    .collection("rooms")
+    .findOneAndUpdate(
+      { _id: new ObjectId(id) },
+      { $set: { updatedAt: ts, link } },
+      { returnDocument: "after" }
+    );
+  return room.value;
+};
+
 module.exports = {
   createRoom,
   getRoom,
   addRoomMember,
   removeRoomMember,
   deleteRoom,
+  updateRoomLink,
 };

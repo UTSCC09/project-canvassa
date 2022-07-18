@@ -5,7 +5,7 @@ import { TitleText } from "../../shared/components";
 
 export const Menu = ({ isOpen, onClose, data }) => {
   return (
-    <Drawer anchor="left" open={isOpen} onClose={onClose}>
+    <Drawer anchor="bottom" open={isOpen} onClose={onClose}>
       <Container>
         <div>
           <RoomTitle>{data?.name}</RoomTitle>
@@ -22,8 +22,7 @@ export const Menu = ({ isOpen, onClose, data }) => {
 };
 
 const Container = styled.div`
-  width: 20vw;
-  padding: 5em;
+  padding: 5rem 3rem;
 
   > *:not(:last-child) {
     margin-bottom: 3rem;

@@ -1,6 +1,7 @@
 const roomsDatabase = require("../databases/rooms");
 const usersService = require("../services/users");
 const CanvassaException = require("../exceptions/CanvassaException");
+const { ENV_VARS } = require("../utils/constants");
 
 const createRoom = async (name, author, initialMembers = null, canvas = {}) => {
   err = "";
@@ -14,13 +15,9 @@ const createRoom = async (name, author, initialMembers = null, canvas = {}) => {
     const user = await usersService.getUserByUsername(author);
     initialMembers = [user._id];
   }
-  const link = ""; // TODO: create join link
-  const room = await roomsDatabase.createRoom(
-    name,
-    link,
-    initialMembers,
-    canvas
-  );
+  let room = await roomsDatabase.createRoom(name, initialMembers, canvas);
+  const link = `${ENV_VARS.DOMAIN}:${ENV_VARS.PORT}/api/rooms/${room._id}/dynamic-join`;
+  room = await roomsDatabase.updateRoomLink(room._id, link);
   await Promise.all(
     room.members.map(
       async (member) => await usersService.addRoom(member, room._id)

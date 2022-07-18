@@ -6,13 +6,16 @@ import {
   Textfield,
   TitleText,
 } from "../../shared/components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getPaths } from "../../shared/constants";
 import { useAuthApi } from "../../shared/api";
 
 export const AuthPage = () => {
   const navigate = useNavigate();
   const { isLoggedIn, signin, signout, signup } = useAuthApi();
+  const search = useLocation().search;
+  const returnToUrl = new URLSearchParams(search).get("returnTo");
+
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,13 +28,12 @@ export const AuthPage = () => {
       setError("");
     }
   };
-
   const signupHandler = () => {
-    signup(username, password).then(authResolveHandler);
+    signup(username, password, returnToUrl).then(authResolveHandler);
   };
 
   const signinHandler = () => {
-    signin(username, password).then(authResolveHandler);
+    signin(username, password, returnToUrl).then(authResolveHandler);
   };
 
   const signoutHandler = () => {

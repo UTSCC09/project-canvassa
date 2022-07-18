@@ -52,7 +52,7 @@ const startServer = async () => {
 
     if (!req.originalUrl.includes("/auth/") && req.method !== "OPTIONS") {
       if (!req.username)
-        return res.status(401).json({ errors: ["access denied"] });
+        return res.redirect(`${FE_VARS.ROOT}/auth?returnTo=${req.originalUrl}`);
     }
     next();
   });

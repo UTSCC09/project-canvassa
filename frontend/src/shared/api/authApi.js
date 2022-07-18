@@ -10,22 +10,22 @@ const getUsername = () =>
 export const useAuthApi = () => ({
   getUsername,
   isLoggedIn: () => getUsername() !== "",
-  signin: (username, password) =>
+  signin: (username, password, returnTo) =>
     axios
       .post(
         `${API.ROOT}/auth/signin`,
-        { username, password },
+        { username, password, returnTo },
         {
           withCredentials: true,
         }
       )
       .then((res) => res.data)
       .catch((err) => console.error(err)),
-  signup: (username, password) =>
+  signup: (username, password, returnTo) =>
     axios
       .post(
         `${API.ROOT}/auth/signup`,
-        { username, password },
+        { username, password, returnTo },
         {
           withCredentials: true,
         }
