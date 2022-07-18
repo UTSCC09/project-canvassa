@@ -15,12 +15,18 @@ export const LandingPage = () => {
   const goToPublicRoomsPage = () => {
     navigate(PATHS.PUBLIC_ROOMS_PAGE, { replaced: true });
   };
+  const goToCanvasPage = () => {
+    navigate(PATHS.CANVAS_PAGE, { replaced: true });
+  };
 
   return (
     <Background>
       <Container>
         <TitleText>Canvassa</TitleText>
         <ContentContainer>
+        <ButtonContainer>
+            <Button onClick={goToCanvasPage}>Create Canvas</Button>
+          </ButtonContainer>
           <ButtonContainer>
             <Button onClick={goToPublicRoomsPage}>Public Rooms</Button>
           </ButtonContainer>

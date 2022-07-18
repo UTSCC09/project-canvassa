@@ -5,3 +5,6 @@ export * from "./SubTitleText";
 export * from "./Markers";
 export * from "./RoomComponent";
 export * from "./Background";
+export * from "./BackButton";
+export * from "./ToolMenu";
+export * from "./MenuItem";
