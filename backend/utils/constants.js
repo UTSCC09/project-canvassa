@@ -14,6 +14,7 @@ const ENV_VARS = {
   PORT,
   DOMAIN: process.env.DOMAIN,
   MONGODB_PORT: process.env.MONGODB_PORT,
+  MONGODB_ROOT: process.env.MONGODB_ROOT,
   DB_NAME: process.env.DB_NAME,
   AUTH0_SECRET: process.env.AUTH0_SECRET,
   AUTH0_BASE_URL: `${process.env.AUTH0_BASE_URL}:${PORT}`,

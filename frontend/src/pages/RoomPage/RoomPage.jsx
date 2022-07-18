@@ -5,7 +5,7 @@ import { Button } from "../../shared/components";
 import { Menu } from "./Menu";
 import { io } from "socket.io-client";
 import { useAuthApi, useRoomsApi } from "../../shared/api";
-import { SOCKET_EVENTS } from "../../shared/constants";
+import { SOCKET_API, SOCKET_EVENTS } from "../../shared/constants";
 
 export const RoomPage = () => {
   const { id: roomId } = useParams();
@@ -29,7 +29,7 @@ export const RoomPage = () => {
     if (socket !== null || !roomData) return;
 
     // establish socket connection
-    const newSocket = io("http://localhost:5000", {
+    const newSocket = io(SOCKET_API.ROOT, {
       transports: ["websocket"],
       auth: { token: getUsername() },
     });

@@ -9,7 +9,11 @@ export const getPaths = {
 export const APP_TITLE = "Canvassa";
 
 export const API = {
-  ROOT: "http://localhost:5000/api",
+  ROOT: "/backend/api",
+};
+
+export const SOCKET_API = {
+  ROOT: "/backend",
 };
 
 export const SOCKET_EVENTS = {
