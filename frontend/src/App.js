@@ -12,7 +12,7 @@ const App = () => {
           exact
           element={<LandingPage />}
         />
-        <Route path={getPaths.getAuthPage()} exact element={<AuthPage />} />
+        <Route path={getPaths.getAuthPage()} element={<AuthPage />} />
         <Route
           path={getPaths.getRoomPage(":id")}
           exact

@@ -52,7 +52,7 @@ const startServer = async () => {
 
     if (!req.originalUrl.includes("/auth/") && req.method !== "OPTIONS") {
       if (!req.username)
-        return res.redirect(`${FE_VARS.ROOT}/auth?returnTo=${req.originalUrl}`);
+        return res.redirect(`http://localhost/auth?returnTo=${req.originalUrl}`);
     }
     next();
   });

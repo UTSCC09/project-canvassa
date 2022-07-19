@@ -82,7 +82,7 @@ router.route("/:id/dynamic-join").get(async (req, res) => {
     if (!room)
       throw new CanvassaException(404, `rooom with id ${id} does not exist`);
     console.log(`${FE_VARS.ROOT}/rooms/${id}`);
-    return res.redirect(301, `${FE_VARS.ROOT}/rooms/${id}`);
+    return res.redirect(301, `http://localhost/rooms/${id}`);
   } catch (err) {
     res
       .status(err.status ?? 500)
