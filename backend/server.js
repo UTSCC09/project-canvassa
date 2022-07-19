@@ -59,9 +59,9 @@ const startServer = async () => {
 
   await connectToDb();
 
-  app.use("/api/users", usersRouter);
-  app.use("/api/auth", authRouter);
-  app.use("/api/rooms", roomsRouter);
+  app.use("/backend/api/users", usersRouter);
+  app.use("/backend/api/auth", authRouter);
+  app.use("/backend/api/rooms", roomsRouter);
 
   const server = createServer(app);
 
