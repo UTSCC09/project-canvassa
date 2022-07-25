@@ -5,21 +5,23 @@ import { getPaths } from "./shared/constants";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route
-          path={getPaths.getLandingPage()}
-          exact
-          element={<LandingPage />}
-        />
-        <Route path={getPaths.getAuthPage()} element={<AuthPage />} />
-        <Route
-          path={getPaths.getRoomPage(":id")}
-          exact
-          element={<RoomPage />}
-        />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route
+            path={getPaths.getLandingPage()}
+            exact
+            element={<LandingPage />}
+          />
+          <Route path={getPaths.getAuthPage()} element={<AuthPage />} />
+          <Route
+            path={getPaths.getRoomPage(":id")}
+            exact
+            element={<RoomPage />}
+          />
+        </Routes>
+      </Router>
+    </>
   );
 };
 

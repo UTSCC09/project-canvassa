@@ -12,7 +12,7 @@ const { setupSockets } = require("./socket");
 
 const startServer = async () => {
   const app = express();
-  const port = process.env.PORT || 5000;
+  const port = ENV_VARS.PORT;
 
   // app.use(cors());
   app.use(express.json());
@@ -49,10 +49,14 @@ const startServer = async () => {
 
   app.use(function (req, res, next) {
     req.username = req.session?.username ?? null;
-
     if (!req.originalUrl.includes("/auth/") && req.method !== "OPTIONS") {
-      if (!req.username)
-        return res.redirect(`http://localhost/auth?returnTo=${req.originalUrl}`);
+      if (!req.username) {
+        console.log(`${ENV_VARS.FE_DOMAIN}/auth?returnTo=${req.originalUrl}`);
+        return res.redirect(
+          301,
+          `${ENV_VARS.FE_DOMAIN}/auth?returnTo=${req.originalUrl}`
+        );
+      }
     }
     next();
   });

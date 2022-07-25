@@ -12,7 +12,7 @@ const login = (req, res, user, returnTo) => {
       maxAge: 60 * 60 * 24 * 7,
     })
   );
-  if (returnTo) return res.redirect(301, returnTo);
+  if (returnTo) return res.redirect(301, `${returnTo}-auth`);
   return res
     .status(200)
     .json({ id: user._id, username: user.username, createdAt: user.createdAt });

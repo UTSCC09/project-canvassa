@@ -16,7 +16,7 @@ const createRoom = async (name, author, initialMembers = null, canvas = {}) => {
     initialMembers = [user._id];
   }
   let room = await roomsDatabase.createRoom(name, initialMembers, canvas);
-  const link = `http://localhost/backend/api/rooms/${room._id}/dynamic-join`;
+  const link = `${ENV_VARS.BE_DOMAIN}/backend/api/rooms/${room._id}/dynamic-join`;
   room = await roomsDatabase.updateRoomLink(room._id, link);
   await Promise.all(
     room.members.map(

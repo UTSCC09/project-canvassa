@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   Button,
@@ -13,8 +13,8 @@ import { useAuthApi } from "../../shared/api";
 export const AuthPage = () => {
   const navigate = useNavigate();
   const { isLoggedIn, signin, signout, signup } = useAuthApi();
-  const search = useLocation().search;
-  const returnToUrl = new URLSearchParams(search).get("returnTo");
+  const location = useLocation();
+  const returnToUrl = new URLSearchParams(location.search).get("returnTo");
 
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
   const [username, setUsername] = useState("");
@@ -22,8 +22,11 @@ export const AuthPage = () => {
   const [error, setError] = useState("");
 
   const authResolveHandler = (data) => {
-    if (data.err) setError(data.err[0]);
-    else {
+    if (!data || data.errors)
+      setError(`Error: ${data?.errors[0] ?? "Unknown error"}`);
+    else if (data.url) {
+      navigate(data.url, { replaced: true });
+    } else {
       setLoggedIn(isLoggedIn());
       setError("");
     }

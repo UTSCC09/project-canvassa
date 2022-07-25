@@ -1,25 +1,34 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
 
 const PORT = process.env.PORT || 5000;
+const ENVIRONMENT = process.env.ENVIRONMENT; // 'dev' | 'prod'
 
 const AUTH_VARS = {
   SALT_ROUNDS: 10,
 };
 
 const FE_VARS = {
-  ROOT: process.env.FE_ROOT,
+  ROOT:
+    ENVIRONMENT === "dev" ? process.env.FE_ROOT_DEV : process.env.FE_ROOT_PROD,
 };
 
 const ENV_VARS = {
   PORT,
-  DOMAIN: process.env.DOMAIN,
   MONGODB_PORT: process.env.MONGODB_PORT,
-  MONGODB_ROOT: process.env.MONGODB_ROOT,
+  MONGODB_ROOT:
+    ENVIRONMENT === "dev"
+      ? process.env.MONGODB_ROOT_DEV
+      : process.env.MONGODB_ROOT_PROD,
   DB_NAME: process.env.DB_NAME,
   AUTH0_SECRET: process.env.AUTH0_SECRET,
-  AUTH0_BASE_URL: `${process.env.AUTH0_BASE_URL}:${PORT}`,
-  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
-  AUTH0_ISSUER_BASE_URL: process.env.AUTH0_ISSUER_BASE_URL,
+  FE_DOMAIN:
+    ENVIRONMENT === "dev"
+      ? process.env.FE_DOMAIN_DEV
+      : process.env.FE_DOMAIN_PROD,
+  BE_DOMAIN:
+    ENVIRONMENT === "dev"
+      ? process.env.BE_DOMAIN_DEV
+      : process.env.BE_DOMAIN_PROD,
 };
 
 const SOCKET_EVENTS = {

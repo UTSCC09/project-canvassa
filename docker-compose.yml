@@ -3,6 +3,8 @@ version: "3"
 services:
   mongo:
     image: mongo
+    ports:
+      - "27017:27017"
     restart: always
     networks:
       - app-network
@@ -10,11 +12,14 @@ services:
     build: ./backend/
     volumes:
       - ./backend/:/usr/src/app
+    ports:
+      - "5000:5000"
     working_dir: /usr/src/app
     command:
       - /bin/bash
       - -c
       - |
+        rm -r node_modules
         npm install
         npm rebuild bcrypt --build-from-source
         npm start
@@ -26,13 +31,16 @@ services:
     build: ./frontend/
     volumes:
       - ./frontend/:/usr/src/app
+    ports:
+      - "3000:3000"
     working_dir: /usr/src/app
     command:
       - /bin/bash
       - -c
       - |
         npm install
-        npm start
+        npm run build
+        node index.js
     networks:
       - app-network
     depends_on:
