@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { LandingPage, AuthPage, RoomPage } from "./pages";
+import { LandingPage, AuthPage, RoomPage, CreateRoomPage } from "./pages";
 import { getPaths } from "./shared/constants";
 
 const App = () => {
@@ -14,6 +14,11 @@ const App = () => {
             element={<LandingPage />}
           />
           <Route path={getPaths.getAuthPage()} element={<AuthPage />} />
+          <Route
+            path={getPaths.getCreateRoomsPage()}
+            exact
+            element={<CreateRoomPage />}
+          />
           <Route
             path={getPaths.getRoomPage(":id")}
             exact
