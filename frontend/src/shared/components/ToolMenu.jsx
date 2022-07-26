@@ -3,10 +3,13 @@ import styled from "styled-components";
 import {MenuItem} from "./";
 
 export const ToolMenu = (props) => {
-  return (<MenuBar><MenuItem color="red"/>
-  <MenuItem color="blue"/>
-  <MenuItem color="green"/>
-  <MenuItem color="black"/></MenuBar>);
+  return (
+  <MenuBar>
+    <MenuItem color="red"/>
+    <MenuItem color="blue"/>
+    <MenuItem color="green"/>
+    <MenuItem color="black"/>
+  </MenuBar>);
 };
 
 const MenuBar = styled.div`

@@ -20,13 +20,14 @@ export const CanvasPage = () => {
   const [lstLines, setLstLines] = useState([[0,0,0]]);
   const [prevMousePos, setPrevMousePose] = useState([0,0]);
   const [mouseDown, setMouseDown] = useState(false);
+  const [frame, setFrame] = useState(0);
 
   useEffect(()=>{
     if(!mouseDown){
-      setLstObjects(lstObjects.concat({points:lstLines, color:"black"}));
-      setLstLines([[prevMousePos[0],prevMousePos[1],0]]);
+      setLstObjects([...lstObjects, {points:lstLines, color:"black"}]);
+      setLstLines([]);
     }
-  });
+  },[mouseDown]);
   
   function Box(){
     return(<mesh>
@@ -36,15 +37,14 @@ export const CanvasPage = () => {
   }
   
 
-  const MouseMoveHandler = (e)=>{
-    console.log("X:"+e.pageX+" Y:"+e.pageY +" " + window.innerHeight);
-    
+  const MouseMoveHandler = (e)=>{    
     const x =1.45*5*((e.pageX / window.innerWidth)*2 - 1);
     const y =0.77*5*(-1*((e.pageY /window.innerHeight)*2 - 1));
     if(mouseDown){
-    setLstLines(lstLines.concat([x,y,0]))
+    setLstLines([...lstLines, [x,y,0]])
     }
     setPrevMousePose(x,y)
+    setFrame(frame + 1);
   }
   
 
@@ -57,8 +57,9 @@ export const CanvasPage = () => {
   }
 
   function RenderObjectsComponent(){
-    return (lstObjects.map((line)=>{
+    return (lstObjects.map((line,i)=>{
       return (<Line
+      key={i}
       points={line.points}
       color={line.color}
       lineWidth={1}/>);
@@ -67,10 +68,7 @@ export const CanvasPage = () => {
 
   function RenderLinesComponent(){
     if(lstLines.length == 0){
-      return (<Line
-        points={[[0,0,0]]}
-        color="black"
-        lineWidth={1}/>);
+      return null;
     }else{
     return(<Line
       points={lstLines}
@@ -84,7 +82,7 @@ export const CanvasPage = () => {
       <BackButton onClick={goToLandingPage} />
       <Canvas camera={{position: [0, 0, 5] }}  onMouseMove={MouseMoveHandler}
   onPointerUp={MouseDownHandler}
-  onPointerDown={MouseUpHandler} >
+  onPointerDown={MouseUpHandler} > 
         <spotLight position={[10, 15, 10]} angle={0.3} />
       <RenderLinesComponent/>
       <RenderObjectsComponent/>
