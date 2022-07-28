@@ -66,6 +66,7 @@ const addSocketId = async (id, socketId, roomId) => {
   if (!roomId) throw new CanvassaException(400, "invalid roomId");
 
   const user = await getUser(id);
+  if (!user) throw new CanvassaException(404, `user with id ${id} not found`);
   return await usersDatabase.addSocketId(id, socketId, roomId);
 };
 
@@ -75,6 +76,7 @@ const removeSocketId = async (id, socketId, roomId) => {
   if (!roomId) throw new CanvassaException(400, "invalid roomId");
 
   const user = await getUser(id);
+  if (!user) throw new CanvassaException(404, `user with id ${id} not found`);
   return await usersDatabase.removeSocketId(id, socketId, roomId);
 };
 

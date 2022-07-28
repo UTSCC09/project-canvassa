@@ -1,6 +1,11 @@
 import axios from "axios";
 import { API } from "../constants";
 
+const errorHandler = (err) => {
+  console.log(err);
+  return err.response.data;
+};
+
 const getUsername = () =>
   document.cookie.replace(
     /(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/,
@@ -20,7 +25,7 @@ export const useAuthApi = () => ({
         }
       )
       .then((res) => res.data)
-      .catch((err) => console.error(err)),
+      .catch(errorHandler),
   signup: (username, password, returnTo) =>
     axios
       .post(
@@ -31,12 +36,12 @@ export const useAuthApi = () => ({
         }
       )
       .then((res) => res.data)
-      .catch((err) => console.error(err)),
+      .catch(errorHandler),
   signout: () =>
     axios
       .get(`${API.ROOT}/auth/signout`, {
         withCredentials: true,
       })
       .then((res) => res.data)
-      .catch((err) => console.error(err)),
+      .catch(errorHandler),
 });
