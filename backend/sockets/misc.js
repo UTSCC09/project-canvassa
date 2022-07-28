@@ -1,4 +1,4 @@
-const { removeRoomMember } = require("../services/rooms");
+const { removeRoomMember, deleteRoom } = require("../services/rooms");
 const { getUserByUsername } = require("../services/users");
 const { SOCKET_EVENTS } = require("../utils/constants");
 
@@ -16,6 +16,7 @@ const onDisconnect = async (io, socket) => {
     io.to(socketRoomName).emit(SOCKET_EVENTS.UPDATE_ROOM_MEMBERS, {
       members: room.members,
     });
+    if (room.members.length === 0) deleteRoom(roomId);
   } catch (err) {
     io.to(socket.id).emit(SOCKET_EVENTS.ERROR, getSocketError(err));
   }

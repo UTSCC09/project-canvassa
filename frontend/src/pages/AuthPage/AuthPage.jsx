@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   Button,
@@ -63,17 +63,15 @@ export const AuthPage = () => {
                 type={"password"}
               />
             </ButtonContainer>
-            {
-              <TitleText
-                style={{
-                  fontSize: "1.5rem",
-                  color: "#c70e0e",
-                  marginBottom: "2rem",
-                }}
-              >
-                {error}
-              </TitleText>
-            }
+            <TitleText
+              style={{
+                fontSize: "1.5rem",
+                color: "#c70e0e",
+                marginBottom: "2rem",
+              }}
+            >
+              {error}
+            </TitleText>
             <ButtonContainer>
               <Button onClick={signinHandler}>Sign In</Button>
             </ButtonContainer>
@@ -82,9 +80,20 @@ export const AuthPage = () => {
             </ButtonContainer>
           </>
         ) : (
-          <ButtonContainer>
-            <Button onClick={signoutHandler}>Sign Out</Button>
-          </ButtonContainer>
+          <>
+            <ButtonContainer>
+              <Button onClick={signoutHandler}>Sign Out</Button>
+            </ButtonContainer>
+            <TitleText
+              style={{
+                fontSize: "1.5rem",
+                color: "#c70e0e",
+                marginBottom: "2rem",
+              }}
+            >
+              {error}
+            </TitleText>
+          </>
         )}
         {loggedIn && (
           <>

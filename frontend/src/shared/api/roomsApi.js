@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API } from "../constants";
+import { errorHandler } from "./apiUtils";
 
 export const useRoomsApi = () => ({
   createRoom: (name) =>
@@ -12,12 +13,12 @@ export const useRoomsApi = () => ({
         }
       )
       .then((res) => res.data)
-      .catch((err) => console.error(err)),
+      .catch(errorHandler),
   getRoom: (id) =>
     axios
       .get(`${API.ROOT}/rooms/${id}`, {
         withCredentials: true,
       })
       .then((res) => res.data)
-      .catch((err) => console.error(err)),
+      .catch(errorHandler),
 });

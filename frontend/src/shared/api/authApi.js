@@ -1,10 +1,6 @@
 import axios from "axios";
 import { API } from "../constants";
-
-const errorHandler = (err) => {
-  console.log(err);
-  return err.response.data;
-};
+import { errorHandler } from "./apiUtils";
 
 const getUsername = () =>
   document.cookie.replace(
