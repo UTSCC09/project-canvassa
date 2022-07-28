@@ -1,11 +1,11 @@
-const express = require('express')
-const app = express()
-const port = 5000
+import { WebSocketServer } from "ws";
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const wss = new WebSocketServer({ port: 5001 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+wss.on("connection", function connection(ws) {
+  ws.on("message", function message(data) {
+    console.log("received: %s", data);
+  });
+
+  ws.send("something");
+});
