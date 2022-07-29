@@ -21,15 +21,43 @@ export const CanvasPage = () => {
   const [prevMousePos, setPrevMousePose] = useState([0, 0]);
   const [mouseDown, setMouseDown] = useState(false);
   const [frame, setFrame] = useState(0);
-  const [connect, setConnnection] = useState(null);
-
+  const [conn, setConnnection] = useState(null);
   //Initiate Networking
   useEffect(() => {
     setConnnection(get_room_connection());
   }, []);
 
+  //Adding All On listeners
+  useEffect(() => {
+    if (conn) {
+      console.log("Added On Listeners");
+      conn.socket.on("lines", (line) => {
+        console.log("Received Line");
+        setLstObjects([...lstObjects, line]);
+      });
+    } else {
+      console.log("Failed to add On Listeners");
+    }
+  }, [conn]);
+
+  //Logging Changes to Lst object
+  useEffect(() => {
+    console.log(lstObjects);
+    if (conn) {
+      conn.socket.on("lines", (line) => {
+        console.log("Received Line");
+        setLstObjects([...lstObjects, line]);
+      });
+    }
+  }, [lstObjects]);
+
   useEffect(() => {
     if (!mouseDown) {
+      if (conn) {
+        conn.socket.emit("lines", { points: lstLines, color: "black" });
+      } else {
+        console.log("Socket Hasn't Establish Connection!");
+      }
       setLstObjects([...lstObjects, { points: lstLines, color: "black" }]);
       setLstLines([]);
     }

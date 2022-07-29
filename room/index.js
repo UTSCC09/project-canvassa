@@ -1,11 +1,18 @@
-import { WebSocketServer } from "ws";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
-const wss = new WebSocketServer({ port: 5001 });
-
-wss.on("connection", function connection(ws) {
-  ws.on("message", function message(data) {
-    console.log("received: %s", data);
-  });
-
-  ws.send("something");
+const httpServer = createServer();
+const io = new Server(httpServer, {
+  cors: {
+    origin: "http://localhost:3002",
+  },
 });
+
+io.on("connection", (socket) => {
+  socket.on("lines", (lines) => {
+    console.log(lines);
+    socket.broadcast.emit("lines", lines);
+  });
+});
+
+httpServer.listen(5000);
