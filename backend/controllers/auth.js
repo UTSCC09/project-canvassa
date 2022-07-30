@@ -52,7 +52,7 @@ router.route("/signout").get(async (req, res) => {
         maxAge: 60 * 60 * 24 * 7,
       })
     );
-    return res.status(200).end();
+    return res.status(200).json({ status: "logged out" });
   } catch (err) {
     res
       .status(err.status ?? 500)

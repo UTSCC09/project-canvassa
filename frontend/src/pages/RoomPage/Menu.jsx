@@ -1,21 +1,48 @@
 import { Drawer } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { TitleText } from "../../shared/components";
+import {
+  Button,
+  ClipboardButton,
+  ContentContainer,
+  TitleText,
+} from "../../shared/components";
+import { getPaths } from "../../shared/constants";
 
 export const Menu = ({ isOpen, onClose, data }) => {
+  const navigate = useNavigate();
+
+  if (!data || !data.name || !data.link || !data.members) return null;
+
   return (
     <Drawer anchor="bottom" open={isOpen} onClose={onClose}>
       <Container>
-        <div>
-          <RoomTitle>{data?.name}</RoomTitle>
-        </div>
-        <div>
-          <RoomLink>{data?.link}</RoomLink>
-        </div>
-        <div>
-          <RoomMembersCount>Members: {data?.members?.length}</RoomMembersCount>
-        </div>
+        <StyledContentContainer>
+          <RowContainer>
+            <RoomTitle>{data.name}</RoomTitle>
+          </RowContainer>
+          <RowContainer>
+            <RoomLink>{data.link}</RoomLink>
+            <ClipboardButtonContainer>
+              <ClipboardButton
+                onClick={() => navigator.clipboard.writeText(data.link)}
+              />
+            </ClipboardButtonContainer>
+          </RowContainer>
+          <RowContainer>
+            <RoomMembersCount>Members: {data.members.length}</RoomMembersCount>
+          </RowContainer>
+          <RowContainer>
+            <Button
+              onClick={() =>
+                navigate(getPaths.getLandingPage(), { replaced: true })
+              }
+            >
+              Exit
+            </Button>
+          </RowContainer>
+        </StyledContentContainer>
       </Container>
     </Drawer>
   );
@@ -23,10 +50,19 @@ export const Menu = ({ isOpen, onClose, data }) => {
 
 const Container = styled.div`
   padding: 5rem 3rem;
+  background: #f0a8a8;
+`;
 
+const StyledContentContainer = styled(ContentContainer)`
   > *:not(:last-child) {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
+`;
+
+const RowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const RoomTitle = styled(TitleText)`
@@ -39,4 +75,8 @@ const RoomLink = styled(TitleText)`
 
 const RoomMembersCount = styled(TitleText)`
   font-size: 2rem;
+`;
+
+const ClipboardButtonContainer = styled.div`
+  margin-left: 1rem;
 `;

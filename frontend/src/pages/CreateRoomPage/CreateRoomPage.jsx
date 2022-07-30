@@ -1,45 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Button, TitleText } from "../../shared/components";
+import { Button, JoinRoomModal, TitleText } from "../../shared/components";
 import { useNavigate } from "react-router-dom";
 import { getPaths } from "../../shared/constants";
+import { RoomCard } from "./RoomCard";
 
 export const CreateRoomPage = () => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const ROOM_TYPES = [
+    {
+      title: "Normal",
+      desc: "Have fun drawing with your friends.",
+      disabled: false,
+      onClick: () => setOpen(true),
+    },
+    {
+      title: "Round Robin",
+      desc: "Get a prompt and take turns drawing it!",
+      disabled: true,
+      onClick: () => {},
+    },
+    {
+      title: "Presenting",
+      desc: "Have a large audience and few presenters that control the canvas",
+      disabled: true,
+      onClick: () => {},
+    },
+  ];
 
   return (
-    <Container>
-      <TitleText>Canvassa</TitleText>
-      <ContentContainer style={{ background: "#f2f2f2", width: "85%" }}>
-        <TitleText style={{ fontSize: "6rem", textAlign: "center" }}>Create a Room</TitleText>
-        <TitleText style={{ fontSize: "4rem", textAlign: "center", marginTop: "2rem", color: "#767676" }}>
-          Create a private room and invite your friends!
-        </TitleText>
-        <GridContainer>
-          <ContentContainer style={{ border: "solid black" }}>
-            <TitleText style={{ fontSize: "2.5rem", textAlign: "center" }}>Normal</TitleText>
-            <TitleText style={{ fontSize: "2.25rem", textAlign: "center", color: "#767676" }}>
-              Have fun drawing with your friends.
-            </TitleText>
-          </ContentContainer>
-          <ContentContainer style={{ border: "solid black" }}>
-            <TitleText style={{ fontSize: "2.5rem", textAlign: "center" }}>Round Robin</TitleText>
-            <TitleText style={{ fontSize: "2.25rem", textAlign: "center", color: "#767676" }}>
-              Get a prompt and take turns drawing it!
-            </TitleText>
-          </ContentContainer>
-          <ContentContainer style={{ border: "solid black" }}>
-            <TitleText style={{ fontSize: "2.5rem", textAlign: "center" }}>Presenting</TitleText>
-            <TitleText style={{ fontSize: "2.25rem", textAlign: "center", color: "#767676" }}>
-              Have a large audience and few presenters that control the canvas
-            </TitleText>
-          </ContentContainer>
-        </GridContainer>
-        <ButtonContainer style={{ marginTop: "2rem" }}>
-          <Button onClick={() => navigate(getPaths.getLandingPage(), { replaced: true })}>Back</Button>
-        </ButtonContainer>
-      </ContentContainer>
-    </Container>
+    <>
+      <Container>
+        <TitleText>Canvassa</TitleText>
+        <ContentContainer style={{ background: "#f2f2f2", width: "85%" }}>
+          <TitleText style={{ fontSize: "6rem", textAlign: "center" }}>
+            Create a Room
+          </TitleText>
+          <TitleText
+            style={{
+              fontSize: "4rem",
+              textAlign: "center",
+              marginTop: "2rem",
+              color: "#767676",
+            }}
+          >
+            Create a private room and invite your friends!
+          </TitleText>
+          <GridContainer>
+            {ROOM_TYPES.map((roomType, i) => (
+              <RoomCard
+                key={i}
+                title={roomType.title}
+                desc={roomType.desc}
+                disabled={roomType.disabled}
+                onClick={roomType.onClick}
+              />
+            ))}
+          </GridContainer>
+          <ButtonContainer style={{ marginTop: "2rem" }}>
+            <Button
+              onClick={() =>
+                navigate(getPaths.getLandingPage(), { replaced: true })
+              }
+            >
+              Back
+            </Button>
+          </ButtonContainer>
+        </ContentContainer>
+      </Container>
+      <JoinRoomModal isOpen={open} onClose={() => setOpen(false)} />
+    </>
   );
 };
 

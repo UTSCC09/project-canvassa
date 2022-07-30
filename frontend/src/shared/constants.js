@@ -8,10 +8,10 @@ export const getPaths = {
 
 export const APP_TITLE = "Canvassa";
 
-// "/backend/api"
-// "http://localhost:5000/backend/api"
+// PROD: "/backend/api"
+// DEV: "http://localhost:5000/backend/api"
 export const API = {
-  ROOT: "/backend/api",
+  ROOT: "http://localhost:5000/backend/api",
 };
 
 export const SOCKET_API = {
