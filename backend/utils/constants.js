@@ -39,4 +39,9 @@ const SOCKET_EVENTS = {
   ERROR: "cavassa-error",
 };
 
-module.exports = { ENV_VARS, AUTH_VARS, FE_VARS, SOCKET_EVENTS };
+const ROOM_TYPES = {
+  NORMAL: "normal",
+  PUBLIC: "public",
+};
+
+module.exports = { ENV_VARS, AUTH_VARS, FE_VARS, SOCKET_EVENTS, ROOM_TYPES };

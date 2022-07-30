@@ -1,7 +1,7 @@
 const { ObjectId, Timestamp } = require("mongodb");
 const { getDb } = require("../utils/db");
 
-const createRoom = async (name, members, canvas) => {
+const createRoom = async (name, members, canvas, type) => {
   const ts = new Timestamp();
   const room = await getDb().collection("rooms").insertOne({
     name,
@@ -10,6 +10,7 @@ const createRoom = async (name, members, canvas) => {
     updatedAt: ts,
     members,
     canvas,
+    type,
   });
   return await getRoom(room.insertedId);
 };
