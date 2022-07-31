@@ -21,10 +21,18 @@ export const LandingPage = () => {
           <Button>Public Rooms</Button>
         </ButtonContainer>
         <ButtonContainer>
-        <Button onClick={() => navigate(getPaths.getCreateRoomsPage(), { replaced: true })}>Create a Room</Button>
+          <Button
+            onClick={() =>
+              navigate(getPaths.getCreateRoomsPage(), { replaced: true })
+            }
+          >
+            Create a Room
+          </Button>
         </ButtonContainer>
         <ButtonContainer>
-          <Button onClick={() => navigate(getPaths.getAuthPage(), { replaced: true })}>
+          <Button
+            onClick={() => navigate(getPaths.getAuthPage(), { replaced: true })}
+          >
             Profile
           </Button>
         </ButtonContainer>

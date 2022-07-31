@@ -6,32 +6,37 @@ import {
   Textfield,
   TitleText,
 } from "../../shared/components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getPaths } from "../../shared/constants";
 import { useAuthApi } from "../../shared/api";
 
 export const AuthPage = () => {
   const navigate = useNavigate();
   const { isLoggedIn, signin, signout, signup } = useAuthApi();
+  const location = useLocation();
+  const returnToUrl = new URLSearchParams(location.search).get("returnTo");
+
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const authResolveHandler = (data) => {
-    if (data.err) setError(data.err[0]);
-    else {
+    if (!data || data.errors)
+      setError(`Error: ${data?.errors[0] ?? "Unknown error"}`);
+    else if (data.url) {
+      navigate(data.url, { replaced: true });
+    } else {
       setLoggedIn(isLoggedIn());
       setError("");
     }
   };
-
   const signupHandler = () => {
-    signup(username, password).then(authResolveHandler);
+    signup(username, password, returnToUrl).then(authResolveHandler);
   };
 
   const signinHandler = () => {
-    signin(username, password).then(authResolveHandler);
+    signin(username, password, returnToUrl).then(authResolveHandler);
   };
 
   const signoutHandler = () => {
@@ -58,17 +63,15 @@ export const AuthPage = () => {
                 type={"password"}
               />
             </ButtonContainer>
-            {
-              <TitleText
-                style={{
-                  fontSize: "1.5rem",
-                  color: "#c70e0e",
-                  marginBottom: "2rem",
-                }}
-              >
-                {error}
-              </TitleText>
-            }
+            <TitleText
+              style={{
+                fontSize: "1.5rem",
+                color: "#c70e0e",
+                marginBottom: "2rem",
+              }}
+            >
+              {error}
+            </TitleText>
             <ButtonContainer>
               <Button onClick={signinHandler}>Sign In</Button>
             </ButtonContainer>
@@ -77,9 +80,20 @@ export const AuthPage = () => {
             </ButtonContainer>
           </>
         ) : (
-          <ButtonContainer>
-            <Button onClick={signoutHandler}>Sign Out</Button>
-          </ButtonContainer>
+          <>
+            <ButtonContainer>
+              <Button onClick={signoutHandler}>Sign Out</Button>
+            </ButtonContainer>
+            <TitleText
+              style={{
+                fontSize: "1.5rem",
+                color: "#c70e0e",
+                marginBottom: "2rem",
+              }}
+            >
+              {error}
+            </TitleText>
+          </>
         )}
         {loggedIn && (
           <>
@@ -96,7 +110,9 @@ export const AuthPage = () => {
             }
             <ButtonContainer>
               <Button
-                onClick={() => navigate(getPaths.getLandingPage(), { replaced: true })}
+                onClick={() =>
+                  navigate(getPaths.getLandingPage(), { replaced: true })
+                }
               >
                 Back
               </Button>

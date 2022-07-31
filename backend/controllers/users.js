@@ -6,7 +6,9 @@ router.route("/").get(async (req, res) => {
     const data = await getUsers();
     res.status(200).json(data);
   } catch (err) {
-    res.status(err.status).json({ errors: err.messages });
+    res
+      .status(err.status ?? 500)
+      .json({ errors: err.messages ?? ["Internal server error"] });
   }
 });
 
@@ -17,7 +19,9 @@ router.route("/").get(async (req, res) => {
 //     res.status(200).json(data);
 //     res.status(200).json(user);
 //   } catch (err) {
-//     res.status(err.status).json({ errors: err.messages });
+//     res
+//       .status(err.status ?? 500)
+//       .json({ errors: err.messages ?? ["Internal server error"] });
 //   }
 // });
 

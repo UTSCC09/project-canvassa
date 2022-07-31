@@ -1,39 +1,43 @@
 import axios from "axios";
 import { API } from "../constants";
+import { errorHandler } from "./apiUtils";
+
+const getUsername = () =>
+  document.cookie.replace(
+    /(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
 
 export const useAuthApi = () => ({
-  isLoggedIn: () =>
-    document.cookie.replace(
-      /(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    ) !== "",
-  signin: (username, password) =>
+  getUsername,
+  isLoggedIn: () => getUsername() !== "",
+  signin: (username, password, returnTo) =>
     axios
       .post(
         `${API.ROOT}/auth/signin`,
-        { username, password },
+        { username, password, returnTo },
         {
           withCredentials: true,
         }
       )
       .then((res) => res.data)
-      .catch((err) => console.error(err)),
-  signup: (username, password) =>
+      .catch(errorHandler),
+  signup: (username, password, returnTo) =>
     axios
       .post(
         `${API.ROOT}/auth/signup`,
-        { username, password },
+        { username, password, returnTo },
         {
           withCredentials: true,
         }
       )
       .then((res) => res.data)
-      .catch((err) => console.error(err)),
+      .catch(errorHandler),
   signout: () =>
     axios
       .get(`${API.ROOT}/auth/signout`, {
         withCredentials: true,
       })
       .then((res) => res.data)
-      .catch((err) => console.error(err)),
+      .catch(errorHandler),
 });
