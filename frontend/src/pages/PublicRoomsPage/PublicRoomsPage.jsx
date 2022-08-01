@@ -24,21 +24,21 @@ export const PublicRoomsPage = () => {
         <ContentContainer>
           <SubTitleText>Public Rooms</SubTitleText>
           <RoomsContainer>
-            <RoomComponent name='Best Room' players='0' />
+            <RoomComponent name="Best Room" players="0" />
 
-            <RoomComponent name='Doodling' players='5' color='#ffdb0e' />
+            <RoomComponent name="Doodling" players="5" color="#ffdb0e" />
 
-            <RoomComponent name='Fun Time' players='10' color='#3e902f' />
+            <RoomComponent name="Fun Time" players="10" color="#3e902f" />
 
-            <RoomComponent name='Room1' players='10' />
+            <RoomComponent name="Room1" players="10" />
 
-            <RoomComponent name='Best Room' players='0' />
+            <RoomComponent name="Best Room" players="0" />
 
-            <RoomComponent name='Doodling' players='5' color='#ffdb0e' />
+            <RoomComponent name="Doodling" players="5" color="#ffdb0e" />
 
-            <RoomComponent name='Fun Time' players='10' color='#3e902f' />
+            <RoomComponent name="Fun Time" players="10" color="#3e902f" />
 
-            <RoomComponent name='Room1' players='10' />
+            <RoomComponent name="Room1" players="10" />
           </RoomsContainer>
           <ButtonContainer>
             <Button onClick={goToLandingPage}>Back</Button>
@@ -71,4 +71,5 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  padding: 5rem 0;
 `;
