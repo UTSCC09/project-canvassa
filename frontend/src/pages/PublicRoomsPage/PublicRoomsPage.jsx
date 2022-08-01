@@ -8,13 +8,13 @@ import {
   RoomComponent,
   Background,
 } from "../../shared/components";
-import { PATHS } from "../../shared/constants";
+import { getPaths } from "../../shared/constants";
 import { useNavigate } from "react-router-dom";
 
 export const PublicRoomsPage = () => {
   const navigate = useNavigate();
   const goToLandingPage = () => {
-    navigate(PATHS.LANDING_PAGE, { replaced: true });
+    navigate(getPaths.getLandingPage(), { replaced: true });
   };
 
   return (
@@ -24,21 +24,21 @@ export const PublicRoomsPage = () => {
         <ContentContainer>
           <SubTitleText>Public Rooms</SubTitleText>
           <RoomsContainer>
-            <RoomComponent name="Best Room" players="0" />
+            <RoomComponent name='Best Room' players='0' />
 
-            <RoomComponent name="Doodling" players="5" color="#ffdb0e" />
+            <RoomComponent name='Doodling' players='5' color='#ffdb0e' />
 
-            <RoomComponent name="Fun Time" players="10" color="#3e902f" />
+            <RoomComponent name='Fun Time' players='10' color='#3e902f' />
 
-            <RoomComponent name="Room1" players="10" />
+            <RoomComponent name='Room1' players='10' />
 
-            <RoomComponent name="Best Room" players="0" />
+            <RoomComponent name='Best Room' players='0' />
 
-            <RoomComponent name="Doodling" players="5" color="#ffdb0e" />
+            <RoomComponent name='Doodling' players='5' color='#ffdb0e' />
 
-            <RoomComponent name="Fun Time" players="10" color="#3e902f" />
+            <RoomComponent name='Fun Time' players='10' color='#3e902f' />
 
-            <RoomComponent name="Room1" players="10" />
+            <RoomComponent name='Room1' players='10' />
           </RoomsContainer>
           <ButtonContainer>
             <Button onClick={goToLandingPage}>Back</Button>

@@ -4,7 +4,7 @@ import { BackButton } from "../../shared/components";
 import { Canvas, render, useFrame, useThree } from "@react-three/fiber";
 import { Line, OrthographicCamera } from "@react-three/drei";
 import * as THREE from "three";
-import { PATHS } from "../../shared/constants";
+import { getPaths } from "../../shared/constants";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { get_room_connection } from "./networking/networkmanger";
@@ -16,7 +16,7 @@ export const CanvasPage = () => {
   const navigate = useNavigate();
   const goToLandingPage = () => {
     setCanvasVisible(false);
-    navigate(PATHS.LANDING_PAGE, { replaced: true });
+    navigate(getPaths.getLandingPage(), { replaced: true });
   };
 
   const listOfLines = useRef([]);
