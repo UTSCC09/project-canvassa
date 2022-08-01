@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useAuthApi } from "../../shared/api";
-import { Button, ContentContainer, TitleText } from "../../shared/components";
+import { Button, 
+  ContentContainer, 
+  TitleText, 
+  Markers,
+  Background } from "../../shared/components";
 import { getPaths } from "../../shared/constants";
 
 export const LandingPage = () => {
@@ -13,32 +17,44 @@ export const LandingPage = () => {
     if (!isLoggedIn()) navigate(getPaths.getAuthPage(), { replaced: true });
   });
 
+  const goToPublicRoomsPage = () => {
+    navigate(getPaths.getPublicRoomsPage(), { replaced: true });
+  };
+  const goToCanvasPage = () => {
+    navigate(getPaths.getCanvasPage(), { replaced: true });
+  };
+
   return (
-    <Container>
-      <TitleText>Canvasa</TitleText>
-      <ContentContainer>
-        <ButtonContainer>
-          <Button>Public Rooms</Button>
-        </ButtonContainer>
-        <ButtonContainer>
-          <Button
-            onClick={() =>
-              navigate(getPaths.getCreateRoomsPage(), { replaced: true })
-            }
-          >
-            Create a Room
-          </Button>
-        </ButtonContainer>
-        <ButtonContainer>
-          <Button
-            onClick={() => navigate(getPaths.getAuthPage(), { replaced: true })}
-          >
-            Profile
-          </Button>
-        </ButtonContainer>
-        <TitleText style={{ fontSize: "1.5rem" }}>Copyrighted 2022</TitleText>
-      </ContentContainer>
-    </Container>
+    <Background>
+      <Container>
+        <TitleText>Canvassa</TitleText>
+        <ContentContainer>
+          <ButtonContainer>
+             <Button onClick={goToCanvasPage}>Create Canvas</Button>
+           </ButtonContainer>
+           <ButtonContainer>
+             <Button onClick={goToPublicRoomsPage}>Public Rooms</Button>
+           </ButtonContainer>
+           <ButtonContainer>
+             <Button
+               onClick={() =>
+                 navigate(getPaths.getCreateRoomsPage(), { replaced: true })
+               }>
+               Create a Room
+             </Button>
+           </ButtonContainer>
+           <ButtonContainer>
+             <Button
+               onClick={() => navigate(getPaths.getAuthPage(), { replaced: true })}
+             >
+               Profile
+             </Button>
+           </ButtonContainer>
+           <TitleText style={{ fontSize: "1.5rem" }}>Copyrighted 2022</TitleText>
+        </ContentContainer>
+      </Container>
+      <Markers></Markers>
+    </Background>
   );
 };
 
@@ -47,12 +63,8 @@ const ButtonContainer = styled.div`
 `;
 
 const Container = styled.div`
-  background: #f0a8a8;
-  height: calc(100vh - 4em);
-  width: calc(100vw - 4em);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 2em;
 `;

@@ -1,6 +1,7 @@
 export const getPaths = {
   getLandingPage: () => "/",
-  getPublicRoomsPage: () => "/rooms/public",
+  getCanvasPage: ()=> "/canvas",
+  getPublicRoomsPage: ()=>"/rooms/public",
   getCreateRoomsPage: () => "/rooms/create",
   getAuthPage: () => "/auth",
   getRoomPage: (id) => `/rooms/${id}`,
