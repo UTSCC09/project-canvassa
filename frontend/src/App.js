@@ -1,15 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { LandingPage, PublicRoomsPage, CanvasPage } from "./pages";
-import { PATHS } from "./shared/constants";
+import { LandingPage, AuthPage, RoomPage, CreateRoomPage, PublicRoomsPage, CanvasPage } from "./pages";
+import { getPaths } from "./shared/constants";
 import { RecoilRoot } from "recoil";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
+    <>
+      <Router>
+        <Routes>
         <Route
-          path={PATHS.CANVAS_PAGE}
+          path={getPaths.getCanvasPage()}
           exact
           element={
             <RecoilRoot>
@@ -17,14 +18,30 @@ const App = () => {
             </RecoilRoot>
           }
         />
-        <Route path={PATHS.LANDING_PAGE} exact element={<LandingPage />} />
         <Route
-          path={PATHS.PUBLIC_ROOMS_PAGE}
+          path={getPaths.getPublicRoomsPage()}
           exact
           element={<PublicRoomsPage />}
         />
-      </Routes>
-    </Router>
+          <Route
+            path={getPaths.getLandingPage()}
+            exact
+            element={<LandingPage />}
+          />
+          <Route path={getPaths.getAuthPage()} element={<AuthPage />} />
+          <Route
+            path={getPaths.getCreateRoomsPage()}
+            exact
+            element={<CreateRoomPage />}
+          />
+          <Route
+            path={getPaths.getRoomPage(":id")}
+            exact
+            element={<RoomPage />}
+          />
+        </Routes>
+      </Router>
+    </>
   );
 };
 
