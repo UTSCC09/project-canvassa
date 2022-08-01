@@ -4,7 +4,7 @@ import { Server } from "socket.io";
 const httpServer = createServer();
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3002",
+    origin: "http://localhost:3000",
   },
 });
 
@@ -15,4 +15,5 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(5000);
+console.log("Starting Server");
+httpServer.listen(3005);
