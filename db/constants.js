@@ -15,9 +15,8 @@ const BE_DOMAIN =
 
 const COLLECTIONS = {
   ROOMS: "rooms",
+  ROOM_MODES: "room-modes",
 };
-
-const ROOM_NAMES = ["Public Room 1", "Public Room 2", "Public Room 3"];
 
 const ROOM_TYPES = {
   NORMAL: "normal",
@@ -29,7 +28,6 @@ module.exports = {
   MONGODB_PORT,
   DB_NAME,
   COLLECTIONS,
-  ROOM_NAMES,
   ROOM_TYPES,
   BE_DOMAIN,
 };

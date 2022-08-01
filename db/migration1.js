@@ -3,13 +3,14 @@ const {
   MONGODB_ROOT,
   MONGODB_PORT,
   DB_NAME,
-  ROOM_NAMES,
   ROOM_TYPES,
   COLLECTIONS,
   BE_DOMAIN,
 } = require("./constants");
 
 const MIGRATION_NAME = "setup-public-rooms";
+
+const ROOM_NAMES = ["Public Room 1", "Public Room 2", "Public Room 3"];
 
 const migration = async () => {
   try {
