@@ -8,6 +8,7 @@ const { ENV_VARS, FE_VARS } = require("./utils/constants");
 const usersRouter = require("./controllers/users");
 const authRouter = require("./controllers/auth");
 const roomsRouter = require("./controllers/rooms");
+const appDataRouter = require("./controllers/appData");
 const { setupSockets } = require("./socket");
 
 const startServer = async () => {
@@ -66,6 +67,7 @@ const startServer = async () => {
   app.use("/backend/api/users", usersRouter);
   app.use("/backend/api/auth", authRouter);
   app.use("/backend/api/rooms", roomsRouter);
+  app.use("/backend/api/app-data", appDataRouter);
 
   const server = createServer(app);
 

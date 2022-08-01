@@ -7,7 +7,7 @@ const {
   removeRoomMember,
   deleteRoom,
 } = require("../services/rooms");
-const { FE_VARS, ENV_VARS } = require("../utils/constants");
+const { ENV_VARS } = require("../utils/constants");
 
 router.route("/").post(async (req, res) => {
   try {
