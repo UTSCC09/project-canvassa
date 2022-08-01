@@ -5,6 +5,12 @@ const getRoomModes = async () => {
   return await cursor.toArray();
 };
 
+const getPublicRooms = async () => {
+  const cursor = await getDb().collection("rooms").find({ type: "public" });
+  return await cursor.toArray();
+};
+
 module.exports = {
   getRoomModes,
+  getPublicRooms,
 };

@@ -10,4 +10,11 @@ export const useAppDataApi = () => ({
       })
       .then((res) => res.data)
       .catch(errorHandler),
+  getPublicRooms: () =>
+    axios
+      .get(`${API.ROOT}/app-data/public-rooms`, {
+        withCredentials: true,
+      })
+      .then((res) => res.data)
+      .catch(errorHandler),
 });

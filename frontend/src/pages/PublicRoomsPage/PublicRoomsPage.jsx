@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   Button,
@@ -7,15 +7,36 @@ import {
   SubTitleText,
   RoomComponent,
   Background,
+  ErrorText,
 } from "../../shared/components";
 import { getPaths } from "../../shared/constants";
 import { useNavigate } from "react-router-dom";
+import { useAppDataApi } from "../../shared/api";
+import { useEffect } from "react";
+
+const COLOURS = ["#ffdb0e", "#3e902f", "#d05f5f"];
 
 export const PublicRoomsPage = () => {
   const navigate = useNavigate();
+  const { getPublicRooms } = useAppDataApi();
+  const [publicRooms, setPublicRooms] = useState(null);
+
   const goToLandingPage = () => {
     navigate(getPaths.getLandingPage(), { replaced: true });
   };
+
+  const PUBLIC_ROOMS = [
+    { _id: -1, name: "Public Rooms 1", members: [] },
+    { _id: -1, name: "Public Rooms 2", members: [] },
+    { _id: -1, name: "Public Rooms 3", members: [] },
+  ];
+
+  useEffect(() => {
+    if (publicRooms !== null) return;
+    getPublicRooms().then((data) => {
+      data && setPublicRooms(data.publicRooms);
+    });
+  }, [publicRooms]);
 
   return (
     <Background>
@@ -23,23 +44,26 @@ export const PublicRoomsPage = () => {
         <TitleText>Canvassa</TitleText>
         <ContentContainer>
           <SubTitleText>Public Rooms</SubTitleText>
-          <RoomsContainer>
-            <RoomComponent name="Best Room" players="0" />
-
-            <RoomComponent name="Doodling" players="5" color="#ffdb0e" />
-
-            <RoomComponent name="Fun Time" players="10" color="#3e902f" />
-
-            <RoomComponent name="Room1" players="10" />
-
-            <RoomComponent name="Best Room" players="0" />
-
-            <RoomComponent name="Doodling" players="5" color="#ffdb0e" />
-
-            <RoomComponent name="Fun Time" players="10" color="#3e902f" />
-
-            <RoomComponent name="Room1" players="10" />
-          </RoomsContainer>
+          {publicRooms === null ? (
+            <ErrorText error="Error: Could not retrieve public rooms" />
+          ) : (
+            <RoomsContainer>
+              {publicRooms.map((publicRoom, i) => (
+                <RoomComponent
+                  name={publicRoom.name}
+                  players={publicRoom.members.length}
+                  key={i}
+                  color={COLOURS[i % COLOURS.length]}
+                  onClick={() => {
+                    if (publicRoom._id === -1) return;
+                    navigate(getPaths.getRoomPage(publicRoom._id), {
+                      replaced: true,
+                    });
+                  }}
+                />
+              ))}
+            </RoomsContainer>
+          )}
           <ButtonContainer>
             <Button onClick={goToLandingPage}>Back</Button>
           </ButtonContainer>
@@ -51,15 +75,13 @@ export const PublicRoomsPage = () => {
 };
 
 const RoomsContainer = styled.div`
-  padding: 5em;
-  margin-bottom: 5em;
-  border-radius: 1em;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
   background-color: #62626b;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
-  grid-gap: 3rem;
-  width: 90vh;
-  max-width: 200em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const ButtonContainer = styled.div`
