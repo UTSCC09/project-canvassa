@@ -16,6 +16,7 @@ const BE_DOMAIN =
 const COLLECTIONS = {
   ROOMS: "rooms",
   ROOM_MODES: "room-modes",
+  MIGRATION_LOCKS: "migration-locks",
 };
 
 const ROOM_TYPES = {

@@ -52,7 +52,6 @@ const startServer = async () => {
     req.username = req.session?.username ?? null;
     if (!req.originalUrl.includes("/auth/") && req.method !== "OPTIONS") {
       if (!req.username) {
-        console.log(`${ENV_VARS.FE_DOMAIN}/auth?returnTo=${req.originalUrl}`);
         return res.redirect(
           301,
           `${ENV_VARS.FE_DOMAIN}/auth?returnTo=${req.originalUrl}`
