@@ -19,6 +19,8 @@ export const RoomCard = ({
 const Container = styled(ContentContainer)`
   border: solid ${(props) => (props.disabled ? "#cecdcd;" : "black")};
   cursor: ${(props) => (props.disabled ? "inherit" : "pointer")};
+  max-width: 30rem;
+  margin: 2rem;
 `;
 
 const Title = styled(TitleText)`
