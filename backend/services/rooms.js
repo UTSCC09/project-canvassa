@@ -8,7 +8,7 @@ const createRoom = async (
   author,
   initialMembers = null,
   canvas = {},
-  type = ROOM_TYPES.NORMAL
+  type = ROOM_TYPES.NORMAL,
 ) => {
   let err = "";
   if (!name) err = "name";
@@ -26,8 +26,8 @@ const createRoom = async (
   room = await roomsDatabase.updateRoomLink(room._id, link);
   await Promise.all(
     room.members.map(
-      async (member) => await usersService.addRoom(member, room._id)
-    )
+      async (member) => await usersService.addRoom(member, room._id),
+    ),
   );
   return room;
 };
@@ -45,7 +45,7 @@ const addRoomMember = async (id, userId) => {
   if (room.members.includes(userId))
     throw new CanvassaException(
       409,
-      `user with id ${userId} already exists in room`
+      `user with id ${userId} already exists in room`,
     );
   room = await roomsDatabase.addRoomMember(id, userId);
   if (!room) return null;
@@ -61,7 +61,7 @@ const removeRoomMember = async (id, userId) => {
   if (!room.members.includes(userId))
     throw new CanvassaException(
       409,
-      `user with id ${userId} does not exist in room`
+      `user with id ${userId} does not exist in room`,
     );
   room = await roomsDatabase.removeRoomMember(id, userId);
   if (!room) return null;

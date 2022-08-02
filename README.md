@@ -1,8 +1,10 @@
 # Project Proposal
 
-
 ## CSC C09 - Summer 2022
 
+## Documentation:
+
+1. ### [Room Server](./doc/roomserver.md)
 
 # Project Information
 
@@ -10,12 +12,9 @@ Project Title: Canvassa
 
 Team Members:
 
-
-
-* Mohammad Rahman
-* Shammo Talukder
-* Farhan Chowdhury
-
+- Mohammad Rahman
+- Shammo Talukder
+- Farhan Chowdhury
 
 ### Description
 
@@ -27,55 +26,43 @@ Groups of friends can create and join private rooms for a more intimate experien
 
 Presentation rooms offer opportunities for more recreational or instructional experiences, where certain participants will act as presenters and be able to use the canvas while others function as audience members who can witness the canvas as it shifts. This mode is ideal when a small subset of the participants want to address a much larger subset.
 
-
 # Challenge Factors - Beta Release
 
 For the beta release, Canvassa will allow users to create and join rooms. They will be able to create the room in any of the aforementioned modes. An authentication and authorization system will be implemented to ensure private rooms remain restricted. The creator of the room can share the room code which their friends can use to enter the room. Each room will feature a canvas, an exit button to leave the room, a list of individuals in the room, and a toolbar with the following tools to customise the canvas:
 
-
-
-* Paintbrush 
-* Colour picker
-* Slider for stroke size
-* Fill tool
-* Square select
-* Text input
-* Eraser
-
+- Paintbrush
+- Colour picker
+- Slider for stroke size
+- Fill tool
+- Square select
+- Text input
+- Eraser
 
 ### In-depth work with specific web technology
 
 In order to implement the canvas and its tools, three.js, a 3D graphics rendering framework will be utilised. three.js natively supports the creation and manipulation of a scene wherein users can create renderable objects and update the scene. Canvassa will leverage this by designing the canvas tools to create the objects and update the scene on rerenders of the webpage to mimic manipulating a canvas. three.js is an optimal choice to implement Canvassa’s features as it:
 
-
-
-* allows any object to be rendered which Canvassa can leverage if it were to expand its own toolbar in the future
-* natively supports many features that a Canvassa canvas must support (e.g. zoom, object colouring, panning, etc.)
-* supports 3D rendering so Canvassa can expand to 3D canvases in future modes
-
+- allows any object to be rendered which Canvassa can leverage if it were to expand its own toolbar in the future
+- natively supports many features that a Canvassa canvas must support (e.g. zoom, object colouring, panning, etc.)
+- supports 3D rendering so Canvassa can expand to 3D canvases in future modes
 
 ### Scalability + real-time interaction
 
 A crucial goal for the app is to ensure it is developed with scalability in mind. This means the app should be able to comfortably support high traffic with many active rooms at the same time. Since the canvas will be heavy in terms of data, only the updates to the canvas will be communicated to avoid desynchronizing users in the same room with slow communication, with the rest of the canvas data being cached on the frontend. Timestamp data will accompany the updates to the canvas so that receivers can ensure they have the most updated canvases. If not, they must reload the canvas from the database. Moreover, although general room information will be acquired through CRUD operations, the canvas data will be communicated through sockets, as frequent back and forth must be available to ensure all users in a room are synchronised.
 
-
 ### Authentication + OAuth
 
 Canvassa will also support persistent accounts so users can keep records of the rooms they created (i.e. timestamps on creation and termination, attendance list, final canvas snapshot). This will also mean a more robust authentication and authorization system will have to be in place to support independent accounts.
-
 
 ### End-to-end testing
 
 In order to ensure confidence in the correctness of development and to prevent new features from introducing bugs in previous ones, all features will be pushed with fully supported end to end test suites using Cypress.io.
 
-
 # Challenge Factors - Final Release
-
 
 ### Real-time interaction (extended)
 
 For the final release, the rooms will support text and audio chat among members. Collapsable sub-windows will be available to ensure users can collaborate more effectively with others in the room without compromising screen space. This will also need to be supported with sockets as correspondence will require a lot of back and forth between the server and clients.
-
 
 # Tech Stack
 
