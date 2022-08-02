@@ -10,6 +10,7 @@ import { InsertImage } from "./InsertImage";
 import { InsertShape } from "./InsertShape";
 import { Undo } from "./Undo";
 import { Redo } from "./Redo";
+import { Button } from "../../../../shared/components";
 
 export const ToolBar = (props) => {
   //States
@@ -25,6 +26,12 @@ export const ToolBar = (props) => {
       <InsertShape />
       <Undo onClick={props.handlers.UndoHandler} />
       <Redo onClick={props.handlers.RedoHandler} />
+      <Button
+        onClick={() => {
+          props.openNavbar();
+        }}>
+        Open Navbar
+      </Button>
     </ToolBarContainer>
   );
 };

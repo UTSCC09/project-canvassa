@@ -11,8 +11,14 @@ import { get_room_connection } from "./networking/networkmanger";
 import { ToolBar } from "./components/toolbar/";
 import { brushSettings } from "./components/toolbar/states";
 import { useRecoilState } from "recoil";
+import { Menu } from "../RoomPage/Menu";
 
-export const CanvasPage = () => {
+export const CanvasPage = ({
+  roomData,
+  openNavbar,
+  closeNavbar,
+  isNavbarOpen,
+}) => {
   const navigate = useNavigate();
   const goToLandingPage = () => {
     setCanvasVisible(false);
@@ -41,12 +47,6 @@ export const CanvasPage = () => {
   useEffect(() => {
     if (conn) {
       console.log("Added On Listeners");
-      // conn.socket.on("loadCanvas", (objects) => {
-      //   console.log("loading canvas");
-      //   // console.log(objects);
-      //   setLstObjects(objects);
-      // });
-
       conn.socket.on("lines", (line) => {
         console.log("Received Line");
         setLstObjects([...lstObjects, line]);
@@ -58,7 +58,6 @@ export const CanvasPage = () => {
 
   //Logging Changes to Lst object
   useEffect(() => {
-    console.log(lstObjects);
     if (conn) {
       conn.socket.on("lines", (line) => {
         console.log("Received Line");
@@ -80,10 +79,12 @@ export const CanvasPage = () => {
       } else {
         console.log("Socket Hasn't Establish Connection!");
       }
-      setLstObjects([
-        ...lstObjects,
-        { points: lstLines, color: settings.color, size: settings.size },
-      ]);
+      if (lstLines.length != 0) {
+        setLstObjects([
+          ...lstObjects,
+          { points: lstLines, color: settings.color, size: settings.size },
+        ]);
+      }
       setLstLines([]);
     }
   }, [mouseDown]);
@@ -104,8 +105,6 @@ export const CanvasPage = () => {
 
   function MouseDownHandler(e) {
     setMouseDown(false);
-    console.log(dbLines);
-    console.log(lstObjects);
   }
 
   function MouseUpHandler(e) {
@@ -173,7 +172,8 @@ export const CanvasPage = () => {
           <RenderObjectsComponent />
         </Canvas>
       ) : null}
-      <ToolBar handlers={handlers} />
+      <ToolBar handlers={handlers} openNavbar={openNavbar} />
+      <Menu isOpen={isNavbarOpen} onClose={closeNavbar} data={roomData} />
     </Container>
   );
 };

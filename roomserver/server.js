@@ -5,7 +5,7 @@ import serverlogic from "./ServerClientLogic.js";
 import canvas from "./Canvas.js";
 import room from "./Room.js";
 
-const startServer = async () => {
+const startServer = async (port = 3005) => {
   //Setup Database
   await connectToDb();
 
@@ -31,6 +31,7 @@ const startServer = async () => {
 
   //Run Http Server
   console.log("Starting Server");
-  httpServer.listen(3005);
+  httpServer.listen(port);
 };
+
 startServer();
