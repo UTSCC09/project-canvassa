@@ -1,15 +1,24 @@
-const { Timestamp, ObjectId } = require("mongodb");
-const { ROOM_TYPES, COLLECTIONS, BE_DOMAIN } = require("../constants");
-const { connectToDb } = require("../utils");
+const { MongoClient, Timestamp, ObjectId } = require("mongodb");
+const {
+  MONGODB_ROOT,
+  MONGODB_PORT,
+  DB_NAME,
+  ROOM_NAMES,
+  ROOM_TYPES,
+  COLLECTIONS,
+  BE_DOMAIN,
+} = require("./constants");
 
 const MIGRATION_NAME = "setup-public-rooms";
 
-const ROOM_NAMES = ["Public Room 1", "Public Room 2", "Public Room 3"];
-
-const migrationUp = async () => {
+const migration = async () => {
   try {
     console.log(`Starting Migration: ${MIGRATION_NAME}`);
-    const db = await connectToDb();
+
+    const client = await MongoClient.connect(
+      `mongodb://${MONGODB_ROOT}:${MONGODB_PORT}/${DB_NAME}`
+    );
+    const db = client.db();
 
     ROOM_NAMES.forEach(async (name) => {
       const ts = new Timestamp();
@@ -44,15 +53,4 @@ const migrationUp = async () => {
   }
 };
 
-const migrationDown = async () => {
-  const db = connectToDb();
-  ROOM_NAMES.forEach(async (name) => {
-    await db.collection(COLLECTIONS.ROOMS).findOneAndDelete({ name });
-  });
-};
-
-module.exports = {
-  migrationUp,
-  migrationDown,
-  name: `${MIGRATION_NAME}-migration1`,
-};
+module.exports = migration;
