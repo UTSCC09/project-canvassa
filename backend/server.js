@@ -50,6 +50,7 @@ const startServer = async () => {
 
   app.use(function (req, res, next) {
     req.username = req.session?.username ?? null;
+    console.log(req.username);
     if (!req.originalUrl.includes("/auth/") && req.method !== "OPTIONS") {
       if (!req.username) {
         return res.redirect(

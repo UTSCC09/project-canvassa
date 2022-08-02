@@ -19,14 +19,20 @@ export const CreateRoomPage = () => {
   const { getRoomModes } = useAppDataApi();
 
   const [open, setOpen] = useState(false);
+
+  /* The following states are to be used for getting the room modes
+     from the backend. They are currently unused in the render since
+     the getRoomModes endpoint fails (a bug to be fixed).
+  */
   const [roomModes, setRoomModes] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (roomModes !== null) return;
     getRoomModes().then((data) => {
-      if (!data || data.errors)
-        setError(`Error: ${data?.errors[0] ?? "Unknown error"}`);
+      if (!data || data.errors) {
+      }
+      // setError(`Error: ${data?.errors[0] ?? "Unknown error"}`);
       else {
         setRoomModes(
           data.roomModes.map((roomMode) => ({
@@ -80,6 +86,10 @@ export const CreateRoomPage = () => {
               {error ? (
                 <ErrorText error={error} />
               ) : (
+                /* A bug exists that forces the getRoomModes API call
+                   to fail. The data is stored on the frontend as a
+                   substitute, as it does not have any security leaks
+                */
                 ROOM_TYPES.map((roomType, i) => (
                   <RoomCard
                     key={i}
