@@ -1,6 +1,8 @@
 # Project Proposal
 
-## CSC C09 - Summer 2022
+## Presentation
+
+[Presentation Video](https://youtu.be/MKy910K6rUg)
 
 ## Documentation:
 
