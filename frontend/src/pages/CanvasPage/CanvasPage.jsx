@@ -28,6 +28,7 @@ export const CanvasPage = () => {
   const [frame, setFrame] = useState(0);
   const [conn, setConnnection] = useState(null);
   const [canvasVisible, setCanvasVisible] = useState(true);
+  const [dbLines, setDbLines] = useState([]);
 
   const [settings, setSettings] = useRecoilState(brushSettings);
 
@@ -40,6 +41,12 @@ export const CanvasPage = () => {
   useEffect(() => {
     if (conn) {
       console.log("Added On Listeners");
+      // conn.socket.on("loadCanvas", (objects) => {
+      //   console.log("loading canvas");
+      //   // console.log(objects);
+      //   setLstObjects(objects);
+      // });
+
       conn.socket.on("lines", (line) => {
         console.log("Received Line");
         setLstObjects([...lstObjects, line]);
@@ -81,6 +88,10 @@ export const CanvasPage = () => {
     }
   }, [mouseDown]);
 
+  // useEffect(() => {
+  //   setLstLines([...dbLines]);
+  // }, [dbLines]);
+
   const MouseMoveHandler = (e) => {
     const x = 1.45 * 5 * ((e.pageX / window.innerWidth) * 2 - 1);
     const y = 0.77 * 5 * (-1 * ((e.pageY / window.innerHeight) * 2 - 1));
@@ -93,6 +104,8 @@ export const CanvasPage = () => {
 
   function MouseDownHandler(e) {
     setMouseDown(false);
+    console.log(dbLines);
+    console.log(lstObjects);
   }
 
   function MouseUpHandler(e) {

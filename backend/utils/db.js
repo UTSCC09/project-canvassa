@@ -6,7 +6,7 @@ let db = null;
 const connectToDb = async () => {
   try {
     const client = await MongoClient.connect(
-      `mongodb://${ENV_VARS.MONGODB_ROOT}:${ENV_VARS.MONGODB_PORT}/${ENV_VARS.DB_NAME}`
+      `mongodb://${ENV_VARS.MONGODB_ROOT}:${ENV_VARS.MONGODB_PORT}/${ENV_VARS.DB_NAME}`,
     );
     console.log("MongoDB database connection established successfully");
     db = client.db();
