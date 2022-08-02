@@ -1,5 +1,5 @@
 const run = async () => {
-  await require("./runMigrations")();
+  await require("./migration1")();
 };
 
 run();

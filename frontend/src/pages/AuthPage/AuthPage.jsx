@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
   Button,
   ContentContainer,
-  ErrorText,
   Textfield,
   TitleText,
 } from "../../shared/components";
@@ -64,7 +63,15 @@ export const AuthPage = () => {
                 type={"password"}
               />
             </ButtonContainer>
-            <ErrorText error={error} />
+            <TitleText
+              style={{
+                fontSize: "1.5rem",
+                color: "#c70e0e",
+                marginBottom: "2rem",
+              }}
+            >
+              {error}
+            </TitleText>
             <ButtonContainer>
               <Button onClick={signinHandler}>Sign In</Button>
             </ButtonContainer>
@@ -77,11 +84,30 @@ export const AuthPage = () => {
             <ButtonContainer>
               <Button onClick={signoutHandler}>Sign Out</Button>
             </ButtonContainer>
-            <ErrorText error={error} />
+            <TitleText
+              style={{
+                fontSize: "1.5rem",
+                color: "#c70e0e",
+                marginBottom: "2rem",
+              }}
+            >
+              {error}
+            </TitleText>
           </>
         )}
         {loggedIn && (
           <>
+            {
+              <TitleText
+                style={{
+                  fontSize: "1.5rem",
+                  color: "#c70e0e",
+                  marginBottom: "2rem",
+                }}
+              >
+                {error}
+              </TitleText>
+            }
             <ButtonContainer>
               <Button
                 onClick={() =>

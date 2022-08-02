@@ -11,4 +11,3 @@ export * from "./Background";
 export * from "./BackButton";
 export * from "./ToolMenu";
 export * from "./MenuItem";
-export * from "./ErrorText";

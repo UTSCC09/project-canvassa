@@ -3,16 +3,12 @@ import styled from "styled-components";
 import backgroundimg from "../../assets/images/canvas-small.png";
 import peopleicon from "../../assets/images/people-icon.png";
 
-export const RoomComponent = ({
-  name = "Room Name",
-  players = 5,
-  color = "#d05f5f",
-}) => {
+export const RoomComponent = ({ name, players, color }) => {
   return (
-    <Background color={color}>
+    <Background color={color || "#d05f5f"}>
       <BottomBar>
-        <Name>{name}</Name>
-        <Number>{players}</Number>
+        <Name>{name || "Room Name"}</Name>
+        <Number>{players || "5"}</Number>
         <PeopleIcon />
       </BottomBar>
     </Background>
@@ -55,7 +51,6 @@ const Background = styled.div`
   border-width: 0.5em;
   background-color: ${(props) => props.color}; /* Tint color */
   background-blend-mode: multiply;
-  margin: 2rem;
   &:hover {
     filter: brightness(85%);
   }

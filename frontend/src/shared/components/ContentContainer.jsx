@@ -11,5 +11,5 @@ export const ContentContainer = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 2rem;
-  margin: 3vh;
+  margin: 10vh;
 `;
