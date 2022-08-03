@@ -6,6 +6,8 @@ import { Menu } from "./Menu";
 import { io } from "socket.io-client";
 import { useAuthApi, useRoomsApi } from "../../shared/api";
 import { SOCKET_API, SOCKET_EVENTS } from "../../shared/constants";
+import { CanvasPage } from "../CanvasPage/CanvasPage";
+import { RecoilRoot } from "recoil";
 
 export const RoomPage = () => {
   const { id: roomId } = useParams();
@@ -57,16 +59,18 @@ export const RoomPage = () => {
     );
   }, [socket]);
 
+  if (!roomData) return null;
+
   return (
     <Container>
-      {!isNavbarOpen && (
-        <Button onClick={() => setIsNavbarOpen(true)}>Open Navbar</Button>
-      )}
-      <Menu
-        isOpen={isNavbarOpen}
-        onClose={() => setIsNavbarOpen(false)}
-        data={roomData}
-      />
+      <RecoilRoot>
+        <CanvasPage
+          roomData={roomData}
+          openNavbar={() => setIsNavbarOpen(true)}
+          closeNavbar={() => setIsNavbarOpen(false)}
+          isNavbarOpen={isNavbarOpen}
+        />
+      </RecoilRoot>
     </Container>
   );
 };

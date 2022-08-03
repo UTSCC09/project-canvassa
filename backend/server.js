@@ -8,6 +8,7 @@ const { ENV_VARS, FE_VARS } = require("./utils/constants");
 const usersRouter = require("./controllers/users");
 const authRouter = require("./controllers/auth");
 const roomsRouter = require("./controllers/rooms");
+const appDataRouter = require("./controllers/appData");
 const { setupSockets } = require("./socket");
 
 const startServer = async () => {
@@ -49,9 +50,9 @@ const startServer = async () => {
 
   app.use(function (req, res, next) {
     req.username = req.session?.username ?? null;
+    console.log(req.username);
     if (!req.originalUrl.includes("/auth/") && req.method !== "OPTIONS") {
       if (!req.username) {
-        console.log(`${ENV_VARS.FE_DOMAIN}/auth?returnTo=${req.originalUrl}`);
         return res.redirect(
           301,
           `${ENV_VARS.FE_DOMAIN}/auth?returnTo=${req.originalUrl}`
@@ -66,6 +67,7 @@ const startServer = async () => {
   app.use("/backend/api/users", usersRouter);
   app.use("/backend/api/auth", authRouter);
   app.use("/backend/api/rooms", roomsRouter);
+  app.use("/backend/api/app-data", appDataRouter);
 
   const server = createServer(app);
 
