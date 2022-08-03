@@ -6,10 +6,10 @@ import {
   ContentContainer,
   ErrorText,
   JoinRoomModal,
-  TitleText,
+  CanvassaText,
 } from "../../shared/components";
 import { useNavigate } from "react-router-dom";
-import { getPaths } from "../../shared/constants";
+import { APP_TITLE, getPaths } from "../../shared/constants";
 import { RoomCard } from "./RoomCard";
 import { useAppDataApi } from "../../shared/api";
 import { useEffect } from "react";
@@ -70,18 +70,11 @@ export const CreateRoomPage = () => {
     <>
       <Background>
         <Container>
-          <TitleText>Canvassa</TitleText>
+          <CanvassaText>{APP_TITLE}</CanvassaText>
           <ContentContainer>
-            <TitleText
-              style={{
-                fontSize: "4rem",
-                textAlign: "center",
-                marginTop: "2rem",
-                color: "#767676",
-              }}
-            >
+            <SubtitleText style={{ color: "#767676" }}>
               Create a private room and invite your friends!
-            </TitleText>
+            </SubtitleText>
             <RoomCardsContainer>
               {error ? (
                 <ErrorText error={error} />
@@ -124,6 +117,12 @@ const Container = styled.div`
   align-items: center;
   justify-content: flex-start;
   padding: 5rem;
+`;
+
+const SubtitleText = styled(CanvassaText)`
+  font-size: 4rem;
+  text-align: center;
+  margin-top: 2rem;
 `;
 
 const RoomCardsContainer = styled.div`

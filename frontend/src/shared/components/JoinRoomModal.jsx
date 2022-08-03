@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Modal } from "@mui/material";
 import styled from "styled-components";
-import { TitleText } from "./TitleText";
+import { CanvassaText } from "./CanvassaText";
 import { Textfield } from "./Textfield";
 import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
@@ -72,12 +72,12 @@ const StyledBox = styled(Box)`
   }
 `;
 
-const ModalTitleText = styled(TitleText)`
+const ModalTitleText = styled(CanvassaText)`
   font-size: 2.5rem;
   text-align: center;
 `;
 
-const ModalDescText = styled(TitleText)`
+const ModalDescText = styled(CanvassaText)`
   font-size: 2.25rem;
   text-align: center;
   color: #767676;
@@ -89,7 +89,7 @@ const ModalInputContainer = styled.div`
   justify-content: center;
 `;
 
-const ModalLabelText = styled(TitleText)`
+const ModalLabelText = styled(CanvassaText)`
   font-size: 2.25rem;
   text-align: center;
   color: #767676;

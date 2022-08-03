@@ -17,15 +17,6 @@ const App = () => {
       <Router>
         <Routes>
           <Route
-            path={getPaths.getCanvasPage()}
-            exact
-            element={
-              <RecoilRoot>
-                <CanvasPage />
-              </RecoilRoot>
-            }
-          />
-          <Route
             path={getPaths.getLandingPage()}
             exact
             element={<LandingPage />}

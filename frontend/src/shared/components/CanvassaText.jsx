@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export const TitleText = ({ children, ...props }) => (
+export const CanvassaText = ({ children, ...props }) => (
   <StyledText {...props}>{children}</StyledText>
 );
 

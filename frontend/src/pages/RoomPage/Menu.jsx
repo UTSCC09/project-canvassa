@@ -6,7 +6,7 @@ import {
   Button,
   ClipboardButton,
   ContentContainer,
-  TitleText,
+  CanvassaText,
 } from "../../shared/components";
 import { getPaths } from "../../shared/constants";
 
@@ -65,15 +65,15 @@ const RowContainer = styled.div`
   align-items: center;
 `;
 
-const RoomTitle = styled(TitleText)`
+const RoomTitle = styled(CanvassaText)`
   font-size: 2.5rem;
 `;
 
-const RoomLink = styled(TitleText)`
+const RoomLink = styled(CanvassaText)`
   font-size: 1.5rem;
 `;
 
-const RoomMembersCount = styled(TitleText)`
+const RoomMembersCount = styled(CanvassaText)`
   font-size: 2rem;
 `;
 

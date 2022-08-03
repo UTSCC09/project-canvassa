@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ContentContainer, TitleText } from "../../shared/components";
+import { ContentContainer, CanvassaText } from "../../shared/components";
 
 export const RoomCard = ({
   title,
@@ -23,13 +23,13 @@ const Container = styled(ContentContainer)`
   margin: 2rem;
 `;
 
-const Title = styled(TitleText)`
+const Title = styled(CanvassaText)`
   font-size: 2.5rem;
   text-align: center;
   ${(props) => (props.disabled ? "color: #cecdcd;" : "")}
 `;
 
-const Description = styled(TitleText)`
+const Description = styled(CanvassaText)`
   font-size: 2.25rem;
   text-align: center;
   color: #767676;

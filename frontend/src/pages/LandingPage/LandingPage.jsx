@@ -5,11 +5,11 @@ import { useAuthApi } from "../../shared/api";
 import {
   Button,
   ContentContainer,
-  TitleText,
+  CanvassaText,
   Markers,
   Background,
 } from "../../shared/components";
-import { getPaths } from "../../shared/constants";
+import { APP_TITLE, getPaths } from "../../shared/constants";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -19,24 +19,11 @@ export const LandingPage = () => {
     if (!isLoggedIn()) navigate(getPaths.getAuthPage(), { replaced: true });
   });
 
-  const goToPublicRoomsPage = () => {
-    navigate(getPaths.getPublicRoomsPage(), { replaced: true });
-  };
-  const goToCanvasPage = () => {
-    navigate(getPaths.getCanvasPage(), { replaced: true });
-  };
-
   return (
     <Background>
       <Container>
-        <TitleText>Canvassa</TitleText>
+        <CanvassaText>{APP_TITLE}</CanvassaText>
         <ContentContainer>
-          <ButtonContainer>
-            <Button onClick={goToCanvasPage}>Create Canvas</Button>
-          </ButtonContainer>
-          <ButtonContainer>
-            <Button onClick={goToPublicRoomsPage}>Public Rooms</Button>
-          </ButtonContainer>
           <ButtonContainer>
             <Button
               onClick={() =>
@@ -55,7 +42,6 @@ export const LandingPage = () => {
               Profile
             </Button>
           </ButtonContainer>
-          <TitleText style={{ fontSize: "1.5rem" }}>Copyrighted 2022</TitleText>
         </ContentContainer>
       </Container>
       <Markers></Markers>

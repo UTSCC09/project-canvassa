@@ -1,4 +1,9 @@
-const { addRoomMember, getRoom } = require("../services/rooms");
+const {
+  addRoomMember,
+  getRoom,
+  removeRoomMember,
+  deleteRoom,
+} = require("../services/rooms");
 const { getUserByUsername, addSocketId } = require("../services/users");
 const { SOCKET_EVENTS } = require("../utils/constants");
 const { getSocketRoomName, getSocketError } = require("./misc");

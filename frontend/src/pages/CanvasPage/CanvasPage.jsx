@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { BackButton } from "../../shared/components";
 import { Canvas, render, useFrame, useThree } from "@react-three/fiber";
 import { Line, OrthographicCamera } from "@react-three/drei";
 import * as THREE from "three";
@@ -160,7 +159,6 @@ export const CanvasPage = ({
 
   return (
     <Container>
-      {/* <BackButton onClick={() => {}} /> */}
       {canvasVisible ? (
         <Canvas
           camera={{ position: [0, 0, 5] }}

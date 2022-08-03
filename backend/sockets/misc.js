@@ -1,4 +1,3 @@
-const { removeRoomMember, deleteRoom } = require("../services/rooms");
 const { getUserByUsername } = require("../services/users");
 const { SOCKET_EVENTS } = require("../utils/constants");
 const { leaveRoom } = require("./rooms");
