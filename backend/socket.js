@@ -1,6 +1,6 @@
 const { Server } = require("socket.io");
 const CanvassaException = require("./exceptions/CanvassaException");
-const { onDisconnect, onJoinRoom } = require("./sockets");
+const { onDisconnect, onJoinRoom, onLines } = require("./sockets");
 const { SOCKET_EVENTS } = require("./utils/constants");
 
 const setupSockets = (server) => {
@@ -25,6 +25,11 @@ const setupSockets = (server) => {
     socket.on(
       SOCKET_EVENTS.JOIN_ROOM,
       async ({ roomId }) => await onJoinRoom(io, socket, roomId)
+    );
+    socket.on(
+      SOCKET_EVENTS.LINES,
+      async ({ roomId, lineObject }) =>
+        await onLines(io, socket, roomId, lineObject)
     );
   });
 };

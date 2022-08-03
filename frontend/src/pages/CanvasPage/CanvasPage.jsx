@@ -6,41 +6,37 @@ import { useEffect } from "react";
 import { ToolBar } from "./components/";
 import { brushSettings } from "./components/states";
 import { useRecoilState } from "recoil";
-import { io } from "socket.io-client";
 import { SOCKET_EVENTS } from "../../shared/constants";
 
-export const CanvasPage = ({ roomData, openNavbar }) => {
+export const CanvasPage = ({ roomData, openNavbar, connection }) => {
   const [lstObjects, setLstObjects] = useState([]);
   const [lstRemovedObjects, setLstRemovedObjects] = useState([]);
-  const [lstLines, setLstLines] = useState([[0, 0, 0]]);
+  const [lstLines, setLstLines] = useState([]);
   const [mouseDown, setMouseDown] = useState(false);
   const [frame, setFrame] = useState(0);
-  const [connection, setConnnection] = useState(null);
 
   const [settings] = useRecoilState(brushSettings);
 
   useEffect(() => {
-    if (connection !== null || !roomData?.serverLink) return;
-
-    const newSocket = io(roomData.serverLink, {
-      transports: ["websocket"],
+    if (!connection) return;
+    connection.on(SOCKET_EVENTS.LINES, ({ lines }) => {
+      console.log(lines);
+      lines?.length > 0 && setLstObjects(lines);
     });
-    setConnnection(newSocket);
-  }, [connection, roomData]);
+  }, [connection]);
 
   useEffect(() => {
     if (!connection) return;
 
-    connection.on(SOCKET_EVENTS.LINES, (line) => {
-      setLstObjects([...lstObjects, line]);
-    });
-
     if (!mouseDown) {
       if (connection) {
         connection.emit(SOCKET_EVENTS.LINES, {
-          points: lstLines,
-          color: settings.color,
-          size: settings.size,
+          roomId: roomData.id,
+          lineObject: {
+            points: lstLines,
+            color: settings.color,
+            size: settings.size,
+          },
         });
       }
       if (lstLines.length !== 0) {
@@ -51,7 +47,7 @@ export const CanvasPage = ({ roomData, openNavbar }) => {
       }
       setLstLines([]);
     }
-  }, [connection, lstObjects, mouseDown]);
+  }, [mouseDown]);
 
   const MouseMoveHandler = (e) => {
     const x = 1.45 * 5 * ((e.pageX / window.innerWidth) * 2 - 1);
@@ -63,14 +59,16 @@ export const CanvasPage = ({ roomData, openNavbar }) => {
   };
 
   const RenderObjectsComponent = () => {
-    return lstObjects.map((line, i) => (
-      <Line
-        key={i}
-        points={line.points}
-        color={line.color}
-        lineWidth={line.size}
-      />
-    ));
+    return lstObjects.map((line, i) =>
+      line.points.length !== 0 ? (
+        <Line
+          key={i}
+          points={line.points}
+          color={line.color}
+          lineWidth={line.size}
+        />
+      ) : null
+    );
   };
 
   const RenderLinesComponent = () => {

@@ -1,12 +1,25 @@
+const { removeRoomMember, deleteRoom } = require("../services/rooms");
 const { getUserByUsername } = require("../services/users");
 const { SOCKET_EVENTS } = require("../utils/constants");
-const { leaveRoom } = require("./rooms");
 
 const onDisconnect = async (io, socket) => {
   try {
     console.log("disconnected: " + socket.id);
     const roomId = await getUserRoomId(socket);
     await leaveRoom(io, socket, roomId);
+  } catch (err) {
+    io.to(socket.id).emit(SOCKET_EVENTS.ERROR, getSocketError(err));
+  }
+};
+
+const leaveRoom = async (io, socket, roomId) => {
+  try {
+    const socketRoomName = getSocketRoomName(roomId);
+    const room = await removeRoomMember(roomId, user._id.toString());
+    io.to(socketRoomName).emit(SOCKET_EVENTS.UPDATE_ROOM_MEMBERS, {
+      members: room.members,
+    });
+    if (room.members.length === 0) deleteRoom(roomId);
   } catch (err) {
     io.to(socket.id).emit(SOCKET_EVENTS.ERROR, getSocketError(err));
   }

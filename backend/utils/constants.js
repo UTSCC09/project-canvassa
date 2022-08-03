@@ -37,6 +37,7 @@ const SOCKET_EVENTS = {
   JOIN_ROOM: "join-room",
   UPDATE_ROOM_MEMBERS: "update-room-members",
   ERROR: "cavassa-error",
+  LINES: "lines",
 };
 
 const ROOM_TYPES = {

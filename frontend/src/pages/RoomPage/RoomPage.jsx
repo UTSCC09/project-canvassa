@@ -66,6 +66,7 @@ export const RoomPage = () => {
         <CanvasPage
           roomData={roomData}
           openNavbar={() => setIsNavbarOpen(true)}
+          connection={socket}
         />
       </RecoilRoot>
       <Menu

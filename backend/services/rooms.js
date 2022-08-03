@@ -84,10 +84,19 @@ const deleteRoom = async (id) => {
   return room;
 };
 
+const updateRoomCanvas = async (id, canvas) => {
+  if (!id) throw new CanvassaException(400, "invalid id");
+  if (!canvas) throw new CanvassaException(400, "invalid canvas");
+
+  const room = await roomsDatabase.updateRoomCanvas(id, canvas);
+  return room;
+};
+
 module.exports = {
   createRoom,
   getRoom,
   addRoomMember,
   removeRoomMember,
   deleteRoom,
+  updateRoomCanvas,
 };

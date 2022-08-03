@@ -79,6 +79,18 @@ const updateRoomServerLink = async (id, serverLink) => {
   return room.value;
 };
 
+const updateRoomCanvas = async (id, canvas) => {
+  const ts = new Timestamp();
+  const room = await getDb()
+    .collection(DB_COLLECTIONS.ROOMS)
+    .findOneAndUpdate(
+      { _id: new ObjectId(id) },
+      { $set: { updatedAt: ts, canvas } },
+      { returnDocument: "after" }
+    );
+  return room.value;
+};
+
 module.exports = {
   createRoom,
   getRoom,
@@ -87,4 +99,5 @@ module.exports = {
   deleteRoom,
   updateRoomLink,
   updateRoomServerLink,
+  updateRoomCanvas,
 };

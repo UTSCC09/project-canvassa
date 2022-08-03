@@ -14,18 +14,19 @@ import { CanvassaButtonStyle } from "../../../shared/components/Button";
 
 export const ToolBar = ({ handlers, openNavbar }) => {
   const tools = [
-    { comp: <Brush />, disabled: false },
-    { comp: <Eraser />, disabled: true },
-    { comp: <ColorPicker />, disabled: false },
-    { comp: <Stroke />, disabled: false },
-    { comp: <InsertText />, disabled: true },
-    { comp: <InsertImage />, disabled: true },
-    { comp: <InsertShape />, disabled: true },
-    { comp: <Undo onClick={handlers.UndoHandler} />, disabled: false },
-    { comp: <Redo onClick={handlers.RedoHandler} />, disabled: false },
+    { comp: <Brush key={1} />, disabled: false },
+    { comp: <Eraser key={2} />, disabled: true },
+    { comp: <ColorPicker key={3} />, disabled: false },
+    { comp: <Stroke key={4} />, disabled: false },
+    { comp: <InsertText key={5} />, disabled: true },
+    { comp: <InsertImage key={6} />, disabled: true },
+    { comp: <InsertShape key={7} />, disabled: true },
+    { comp: <Undo onClick={handlers.UndoHandler} key={8} />, disabled: false },
+    { comp: <Redo onClick={handlers.RedoHandler} key={9} />, disabled: false },
     {
       comp: (
         <Button
+          key={10}
           onClick={() => {
             openNavbar();
           }}
