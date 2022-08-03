@@ -2,12 +2,12 @@ import React from "react";
 import { Button as MuiButton } from "@mui/material";
 
 export const Button = ({ children, ...props }) => (
-  <MuiButton style={MuiButtonStyle} {...props}>
+  <MuiButton style={CanvassaButtonStyle} {...props}>
     {children}
   </MuiButton>
 );
 
-const MuiButtonStyle = {
+export const CanvassaButtonStyle = {
   fontSize: "1.5rem",
   padding: "0.5rem 2rem",
   background: "#FFFFFF",
