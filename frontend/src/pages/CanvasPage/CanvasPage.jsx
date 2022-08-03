@@ -40,7 +40,7 @@ export const CanvasPage = ({
 
   //Initiate Networking
   useEffect(() => {
-    setConnnection(get_room_connection(roomData.serverLink));
+    setConnnection(get_room_connection());
   }, []);
 
   //Adding All On listeners
@@ -166,8 +166,7 @@ export const CanvasPage = ({
           camera={{ position: [0, 0, 5] }}
           onMouseMove={MouseMoveHandler}
           onPointerUp={MouseDownHandler}
-          onPointerDown={MouseUpHandler}
-        >
+          onPointerDown={MouseUpHandler}>
           <spotLight position={[10, 15, 10]} angle={0.3} />
           <RenderLinesComponent />
           <RenderObjectsComponent />

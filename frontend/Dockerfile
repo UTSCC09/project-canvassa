@@ -1,6 +1,13 @@
 FROM node:16
 
-# Create app directory
 WORKDIR /usr/src/app
 
+#Installs Packages
+COPY package*.json ./
+RUN npm install
+
+#Copies src code over
+COPY . .
+
 EXPOSE 3000
+CMD ["npm", "start"]

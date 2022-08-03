@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: canvassa-frontend
+  template:
+    metadata:
+      labels:
+        app: canvassa-frontend
+    spec:
+      containers:
+      - name: canvassa-frontend
+        image: canvassa/c09:latest
+        imagePullPolicy: "Always"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "1000m"
+        ports:
+        - containerPort: 3000

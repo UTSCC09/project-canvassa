@@ -1,0 +1,17 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: http-express
+  namespace: staging
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: kub.canvassa.tech
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: frontend-service
+          servicePort: 3000

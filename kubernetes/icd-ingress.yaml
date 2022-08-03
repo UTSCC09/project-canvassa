@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: icd-ingress
+  namespace: icd
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/affinity-mode: persistent
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+    nginx.ingress.kubernetes.io/secure-backends: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    ingress.kubernetes.io/backend-protocol: "HTTPS"
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+  - hosts:
+    - icd.ibm.com
+    secretName: icd-secret
+  rules:
+  - host: icd.ibm.com
+    http:
+      paths:
+      - path: /maximoapi
+        backend:
+          serviceName: icd-api
+          servicePort: 9080
+      - path: /cron
+        backend:
+          serviceName: icd-cron
+          servicePort: 9080
+      - path: /mea
+        backend:
+          serviceName: icd-mea
+          servicePort: 9080
+      - path: /
+        backend:
+          serviceName: icd-ui
+          servicePort: 9080
