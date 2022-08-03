@@ -5,7 +5,6 @@ const session = require("express-session");
 const { createServer } = require("http");
 
 const { ENV_VARS, FE_VARS } = require("./utils/constants");
-const usersRouter = require("./controllers/users");
 const authRouter = require("./controllers/auth");
 const roomsRouter = require("./controllers/rooms");
 const appDataRouter = require("./controllers/appData");
@@ -50,7 +49,7 @@ const startServer = async () => {
 
   app.use(function (req, res, next) {
     req.username = req.session?.username ?? null;
-    console.log(req.username);
+
     if (!req.originalUrl.includes("/auth/") && req.method !== "OPTIONS") {
       if (!req.username) {
         return res.redirect(
@@ -64,7 +63,6 @@ const startServer = async () => {
 
   await connectToDb();
 
-  app.use("/backend/api/users", usersRouter);
   app.use("/backend/api/auth", authRouter);
   app.use("/backend/api/rooms", roomsRouter);
   app.use("/backend/api/app-data", appDataRouter);

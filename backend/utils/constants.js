@@ -44,4 +44,17 @@ const ROOM_TYPES = {
   PUBLIC: "public",
 };
 
-module.exports = { ENV_VARS, AUTH_VARS, FE_VARS, SOCKET_EVENTS, ROOM_TYPES };
+const DB_COLLECTIONS = {
+  ROOM_MODES: "room-modes",
+  ROOMS: "rooms",
+  USERS: "users",
+};
+
+module.exports = {
+  ENV_VARS,
+  AUTH_VARS,
+  FE_VARS,
+  SOCKET_EVENTS,
+  ROOM_TYPES,
+  DB_COLLECTIONS,
+};
