@@ -1,26 +1,29 @@
 const { ObjectId, Timestamp } = require("mongodb");
+const { DB_COLLECTIONS } = require("../utils/constants");
 const { getDb } = require("../utils/db");
 
 const getUsers = async () => {
-  const cursor = await getDb().collection("users").find({});
+  const cursor = await getDb().collection(DB_COLLECTIONS.USERS).find({});
   return await cursor.toArray();
 };
 
 const getUser = async (id) => {
   const user = await getDb()
-    .collection("users")
+    .collection(DB_COLLECTIONS.USERS)
     .findOne({ _id: new ObjectId(id) });
   return user;
 };
 
 const getUserByUsername = async (username) => {
-  const user = await getDb().collection("users").findOne({ username });
+  const user = await getDb()
+    .collection(DB_COLLECTIONS.USERS)
+    .findOne({ username });
   return user;
 };
 
 const createUser = async (username, password) => {
   const ts = new Timestamp();
-  const user = await getDb().collection("users").insertOne({
+  const user = await getDb().collection(DB_COLLECTIONS.USERS).insertOne({
     username,
     password,
     createdAt: ts,
@@ -34,7 +37,7 @@ const createUser = async (username, password) => {
 const addRoom = async (id, roomId) => {
   const ts = new Timestamp();
   const user = await getDb()
-    .collection("users")
+    .collection(DB_COLLECTIONS.USERS)
     .findOneAndUpdate(
       { _id: ObjectId(id) },
       { $push: { rooms: roomId }, $set: { updatedAt: ts } },
@@ -46,7 +49,7 @@ const addRoom = async (id, roomId) => {
 const removeRoom = async (id, roomId) => {
   const ts = new Timestamp();
   const user = await getDb()
-    .collection("users")
+    .collection(DB_COLLECTIONS.USERS)
     .findOneAndUpdate(
       { _id: new ObjectId(id) },
       { $pull: { rooms: roomId }, $set: { updatedAt: ts } },
@@ -58,7 +61,7 @@ const removeRoom = async (id, roomId) => {
 const addSocketId = async (id, socketId, roomId) => {
   const ts = new Timestamp();
   const user = await getDb()
-    .collection("users")
+    .collection(DB_COLLECTIONS.USERS)
     .findOneAndUpdate(
       { _id: new ObjectId(id) },
       { $push: { connections: { socketId, roomId } }, $set: { updatedAt: ts } },
@@ -70,7 +73,7 @@ const addSocketId = async (id, socketId, roomId) => {
 const removeSocketId = async (id, socketId, roomId) => {
   const ts = new Timestamp();
   const user = await getDb()
-    .collection("users")
+    .collection(DB_COLLECTIONS.USERS)
     .findOneAndUpdate(
       { _id: new ObjectId(id) },
       { $pull: { connections: { socketId, roomId } }, $set: { updatedAt: ts } },
@@ -81,7 +84,7 @@ const removeSocketId = async (id, socketId, roomId) => {
 
 const getUserBySocketId = async (socketId) => {
   const user = await getDb()
-    .collection("users")
+    .collection(DB_COLLECTIONS.USERS)
     .findOne({ connections: { $elemMatch: { socketId } } });
   return user;
 };

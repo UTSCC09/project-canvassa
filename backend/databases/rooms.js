@@ -1,9 +1,10 @@
 const { ObjectId, Timestamp } = require("mongodb");
+const { DB_COLLECTIONS } = require("../utils/constants");
 const { getDb } = require("../utils/db");
 
 const createRoom = async (name, members, canvas, type) => {
   const ts = new Timestamp();
-  const room = await getDb().collection("rooms").insertOne({
+  const room = await getDb().collection(DB_COLLECTIONS.ROOMS).insertOne({
     name,
     link: "",
     serverLink: "",
@@ -18,7 +19,7 @@ const createRoom = async (name, members, canvas, type) => {
 
 const getRoom = async (id) => {
   const room = await getDb()
-    .collection("rooms")
+    .collection(DB_COLLECTIONS.ROOMS)
     .findOne({ _id: new ObjectId(id) });
   return room;
 };
@@ -26,7 +27,7 @@ const getRoom = async (id) => {
 const addRoomMember = async (id, memberId) => {
   const ts = new Timestamp();
   const room = await getDb()
-    .collection("rooms")
+    .collection(DB_COLLECTIONS.ROOMS)
     .findOneAndUpdate(
       { _id: new ObjectId(id) },
       { $push: { members: memberId }, $set: { updatedAt: ts } },
@@ -38,7 +39,7 @@ const addRoomMember = async (id, memberId) => {
 const removeRoomMember = async (id, memberId) => {
   const ts = new Timestamp();
   const room = await getDb()
-    .collection("rooms")
+    .collection(DB_COLLECTIONS.ROOMS)
     .findOneAndUpdate(
       { _id: new ObjectId(id) },
       { $pull: { members: memberId }, $set: { updatedAt: ts } },
@@ -49,7 +50,7 @@ const removeRoomMember = async (id, memberId) => {
 
 const deleteRoom = async (id) => {
   const room = await getDb()
-    .collection("rooms")
+    .collection(DB_COLLECTIONS.ROOMS)
     .findOneAndDelete({ _id: new ObjectId(id) });
   return room.value;
 };
@@ -57,7 +58,7 @@ const deleteRoom = async (id) => {
 const updateRoomLink = async (id, link) => {
   const ts = new Timestamp();
   const room = await getDb()
-    .collection("rooms")
+    .collection(DB_COLLECTIONS.ROOMS)
     .findOneAndUpdate(
       { _id: new ObjectId(id) },
       { $set: { updatedAt: ts, link } },
@@ -69,7 +70,7 @@ const updateRoomLink = async (id, link) => {
 const updateRoomServerLink = async (id, serverLink) => {
   const ts = new Timestamp();
   const room = await getDb()
-    .collection("rooms")
+    .collection(DB_COLLECTIONS.ROOMS)
     .findOneAndUpdate(
       { _id: new ObjectId(id) },
       { $set: { updatedAt: ts, serverLink } },

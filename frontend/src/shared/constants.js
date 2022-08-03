@@ -1,6 +1,5 @@
 export const getPaths = {
   getLandingPage: () => "/",
-  getCanvasPage: () => "/canvas",
   getCreateRoomsPage: () => "/rooms/create",
   getAuthPage: () => "/auth",
   getRoomPage: (id) => `/rooms/${id}`,
@@ -23,4 +22,5 @@ export const SOCKET_EVENTS = {
   UPDATE_ROOM_MEMBERS: "update-room-members",
   ERROR: "cavassa-error",
   CONNECT_ERROR: "connect_error",
+  LINES: "lines",
 };

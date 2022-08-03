@@ -7,7 +7,6 @@ const setupSockets = (server) => {
   const io = new Server(server);
 
   io.use((socket, next) => {
-    console.log(`Socket ${socket.id} ${socket.handshake.auth.token}`);
     if (socket.handshake.auth.token) {
       socket.username = socket.handshake.auth.token;
       next();

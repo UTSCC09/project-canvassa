@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "../../shared/components";
 import { Menu } from "./Menu";
 import { io } from "socket.io-client";
 import { useAuthApi, useRoomsApi } from "../../shared/api";
@@ -67,17 +66,19 @@ export const RoomPage = () => {
         <CanvasPage
           roomData={roomData}
           openNavbar={() => setIsNavbarOpen(true)}
-          closeNavbar={() => setIsNavbarOpen(false)}
-          isNavbarOpen={isNavbarOpen}
         />
       </RecoilRoot>
+      <Menu
+        isOpen={isNavbarOpen}
+        onClose={() => setIsNavbarOpen(false)}
+        data={roomData}
+      />
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
-  background: #dedede;
   height: 100vh;
   width: 100%;
   justify-content: center;

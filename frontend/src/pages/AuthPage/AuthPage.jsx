@@ -5,7 +5,6 @@ import {
   ContentContainer,
   ErrorText,
   Textfield,
-  TitleText,
 } from "../../shared/components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getPaths } from "../../shared/constants";
