@@ -1,15 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import {
-  LandingPage,
-  AuthPage,
-  RoomPage,
-  CreateRoomPage,
-  PublicRoomsPage,
-  CanvasPage,
-} from "./pages";
+import { LandingPage, AuthPage, RoomPage, CreateRoomPage } from "./pages";
 import { getPaths } from "./shared/constants";
-import { RecoilRoot } from "recoil";
 
 const App = () => {
   return (

@@ -1,14 +1,28 @@
-# Project Proposal
+# Canvassa
 
 ## Presentation
 
 [Presentation Video](https://youtu.be/MKy910K6rUg)
 
-## Documentation:
+## Accessing the Deployed Version
+
+[TODO]
+
+## The Dev Env
+
+The dev environment consists of 4 parts:
+- [Database](./doc/Database.md)
+- [Canvassa Server](./doc/Backend.md)
+- Rooms Server
+- Canvassa Frontend
+
+Consult the documentation on each part to learn how to set it up for the local environment and for further details on how they work.
 
 1. ### [Room Server](./doc/roomserver.md)
 
-# Project Information
+# Project Proposal
+
+## Project Information
 
 Project Title: Canvassa
 
@@ -28,7 +42,7 @@ Groups of friends can create and join private rooms for a more intimate experien
 
 Presentation rooms offer opportunities for more recreational or instructional experiences, where certain participants will act as presenters and be able to use the canvas while others function as audience members who can witness the canvas as it shifts. This mode is ideal when a small subset of the participants want to address a much larger subset.
 
-# Challenge Factors - Beta Release
+## Challenge Factors - Beta Release
 
 For the beta release, Canvassa will allow users to create and join rooms. They will be able to create the room in any of the aforementioned modes. An authentication and authorization system will be implemented to ensure private rooms remain restricted. The creator of the room can share the room code which their friends can use to enter the room. Each room will feature a canvas, an exit button to leave the room, a list of individuals in the room, and a toolbar with the following tools to customise the canvas:
 
@@ -60,13 +74,13 @@ Canvassa will also support persistent accounts so users can keep records of the 
 
 In order to ensure confidence in the correctness of development and to prevent new features from introducing bugs in previous ones, all features will be pushed with fully supported end to end test suites using Cypress.io.
 
-# Challenge Factors - Final Release
+## Challenge Factors - Final Release
 
 ### Real-time interaction (extended)
 
 For the final release, the rooms will support text and audio chat among members. Collapsable sub-windows will be available to ensure users can collaborate more effectively with others in the room without compromising screen space. This will also need to be supported with sockets as correspondence will require a lot of back and forth between the server and clients.
 
-# Tech Stack
+## Tech Stack
 
 React.js will be used for the frontend. This is because although it makes adherence to the MVVM protocol and keeping the JS, HTML, and CSS independent more difficult, the utilitarian approach React provides is ideal for rapid development, which can be crucial as we are dealing with hard deadlines for the progression of the project and other courses can prevent us from spending as much time as we would want to on development. Most importantly however, we are most experienced with React so choosing it allows our learning to focus on the web problems we tackle rather than the specific framework.
 
