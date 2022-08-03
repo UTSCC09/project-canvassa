@@ -55,11 +55,11 @@ export const RoomPage = () => {
     });
 
     socket.on(SOCKET_EVENTS.UPDATE_ROOM_MEMBERS, ({ members }) =>
-      setRoomData({ ...roomData, members }),
+      setRoomData({ ...roomData, members })
     );
   }, [socket]);
 
-  useEffect(() => console.log(isNavbarOpen), [isNavbarOpen]);
+  if (!roomData) return null;
 
   return (
     <Container>

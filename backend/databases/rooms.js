@@ -6,6 +6,7 @@ const createRoom = async (name, members, canvas, type) => {
   const room = await getDb().collection("rooms").insertOne({
     name,
     link: "",
+    serverLink: "",
     createdAt: ts,
     updatedAt: ts,
     members,
@@ -65,6 +66,18 @@ const updateRoomLink = async (id, link) => {
   return room.value;
 };
 
+const updateRoomServerLink = async (id, serverLink) => {
+  const ts = new Timestamp();
+  const room = await getDb()
+    .collection("rooms")
+    .findOneAndUpdate(
+      { _id: new ObjectId(id) },
+      { $set: { updatedAt: ts, serverLink } },
+      { returnDocument: "after" }
+    );
+  return room.value;
+};
+
 module.exports = {
   createRoom,
   getRoom,
@@ -72,4 +85,5 @@ module.exports = {
   removeRoomMember,
   deleteRoom,
   updateRoomLink,
+  updateRoomServerLink,
 };

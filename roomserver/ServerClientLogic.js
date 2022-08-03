@@ -12,6 +12,7 @@ function setupLogic() {
 
   //On Connection
   io.on("connection", (socket) => {
+    console.log("Registered socker connection: ", socket.id);
     //Update User With Current Canvas
     setTimeout(() => {
       canvas.getCanvas().lines.forEach((l) => {
