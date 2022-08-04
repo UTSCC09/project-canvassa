@@ -16,7 +16,6 @@ const onJoinRoom = async (io, socket, roomId) => {
     io.to(socketRoomName).emit(SOCKET_EVENTS.UPDATE_ROOM_MEMBERS, {
       members: room.members,
     });
-    console.log(room.canvas);
     io.to(socket.id).emit(SOCKET_EVENTS.LINES, room.canvas);
   } catch (err) {
     io.to(socket.id).emit(SOCKET_EVENTS.ERROR, getSocketError(err));

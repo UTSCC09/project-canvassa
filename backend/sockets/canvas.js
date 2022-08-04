@@ -4,7 +4,6 @@ const { getSocketError, getSocketRoomName } = require("./misc");
 
 const onLines = async (io, socket, roomId, lineObject) => {
   try {
-    console.log(roomId, lineObject);
     let room = await getRoom(roomId);
     room = await updateRoomCanvas(roomId, {
       ...room.canvas,
@@ -15,7 +14,6 @@ const onLines = async (io, socket, roomId, lineObject) => {
     const socketRoomName = getSocketRoomName(roomId);
     io.to(socketRoomName).emit(SOCKET_EVENTS.LINES, room.canvas);
   } catch (err) {
-    console.log(err);
     io.to(socket.id).emit(SOCKET_EVENTS.ERROR, getSocketError(err));
   }
 };

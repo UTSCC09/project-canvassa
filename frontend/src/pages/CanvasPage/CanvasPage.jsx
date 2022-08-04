@@ -20,7 +20,6 @@ export const CanvasPage = ({ roomData, openNavbar, connection }) => {
   useEffect(() => {
     if (!connection) return;
     connection.on(SOCKET_EVENTS.LINES, ({ lines }) => {
-      console.log(lines);
       lines?.length > 0 && setLstObjects(lines);
     });
   }, [connection]);
