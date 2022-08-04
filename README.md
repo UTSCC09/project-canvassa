@@ -6,7 +6,7 @@
 
 ## Accessing the Deployed Version
 
-[TODO]
+Visit http://canvassa.tech
 
 For a full experience of how the app works, you can try the following.
 
@@ -23,6 +23,8 @@ The dev environment consists of 4 parts:
 - [Canvassa Server](./doc/Backend.md)
 - [Rooms Server](./doc/roomserver.md)
 - [Canvassa Frontend](./doc/Frontend.md)
+- [Kubernetes Deployment](./doc/kubernetes.md)
+- [Docker Deployment](./doc/dockerdeployment.md)
 
 Consult the documentation on each part to learn how to set it up for the local environment and for further details on how they work.
 
