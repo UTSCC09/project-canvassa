@@ -8,17 +8,23 @@
 
 [TODO]
 
+For a full experience of how the app works, you can try the following.
+
+First, create an account (say A) and sign in. Create a room. This will take you to the a page where you can start playing with the canvas. Feel free to use the tools to draw, change colour, change brush stroke, undo, or redo. You can also open the menu and copy the join link.
+
+From here, you can simulate sending a friend or acquantance the link by opening an incognito tab and pasting the link in the search bar. This will ensure you can signin to a different account without conflicting with your first one. The link will ask you to create an account first (say B), and then you can join the canvas page. Notice how on join, the canvas will look like how A left it, and any change by either A or B will now synchronously update on both pages. You can continue to have fun here!
+
+Once you are done, you can open the menu and exit back to the landing page.
+
 ## The Dev Env
 
 The dev environment consists of 4 parts:
 - [Database](./doc/Database.md)
 - [Canvassa Server](./doc/Backend.md)
-- Rooms Server
-- Canvassa Frontend
+- [Rooms Server](./doc/roomserver.md)
+- [Canvassa Frontend](./doc/Frontend.md)
 
 Consult the documentation on each part to learn how to set it up for the local environment and for further details on how they work.
-
-1. ### [Room Server](./doc/roomserver.md)
 
 # Project Proposal
 
